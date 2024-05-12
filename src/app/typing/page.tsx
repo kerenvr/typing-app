@@ -1,15 +1,18 @@
 'use client'
 import React from 'react'
 import { useEffect, useState } from 'react'
-import handleKeyDown from '@/utils/utils'
 
 function Typing() {
   const [words, setWords] = useState([]);
   const [keyPressed, setKeyPressed] = useState('');
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      setKeyPressed(event.key);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key.length === 1) {
+        setKeyPressed(prevKeyPressed => prevKeyPressed + e.key);
+      } else if (e.key === 'Backspace') {
+        setKeyPressed(prevKeyPressed => prevKeyPressed.slice(0, -1));
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown);
