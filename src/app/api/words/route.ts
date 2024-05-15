@@ -1,6 +1,6 @@
 //https://datalab.medium.com/nextjs-14-json-api-with-mysql-9f635b5ecb1d
 import { NextResponse } from "next/server";
-import pool from "@/app/lib/mysql";
+import pool from "@/lib/mysql";
 
 export async function GET() {
     try {
