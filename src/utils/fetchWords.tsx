@@ -9,3 +9,5 @@ export const fetchWords = async () => {
     }
     return { tempArray } ;
 }
+
+
