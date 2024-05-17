@@ -1,9 +1,12 @@
 import Typing from '@/components/typing/Typing'
+import { Suspense } from 'react'
 
 function TypingPage() {
   return (
-    <div>TypingPage
-      <Typing />
+    <div>
+
+        <Typing />
+
     </div>
   )
 }
