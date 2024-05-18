@@ -1,0 +1,22 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.wordContainer{
+    font-size: 30px;
+    /* background-color: rgb(250, 243, 255); */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    /* width: 70%; */
+}
+
+.container{
+    display: flex;
+}

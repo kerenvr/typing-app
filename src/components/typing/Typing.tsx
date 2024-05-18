@@ -1,107 +1,86 @@
-'use client'
-import React from 'react'
-import { useEffect, useState, useRef } from 'react'
-import { fetchWords } from '@/utils/fetchWords';
-import Link from 'next/link'
+"use client"
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+// import Loading from '@/components/loading';
+import WordDisplay from '@/components/wordDisplay/wordDisplay';
+import Flowers from '@/components/flowers/flowers'; // Import Flowers component
+import { useTimer } from '@/hooks/useTimer';
+import styles from './typing.module.css';
 
-function Typing() {
-  //initialize words, wordsTyped, current character, and current index
-  const [correctWordsTyped, setCorrectWordsTyped] = useState('');
-  const [wordsTyped, setwordsTyped] = useState('');
+const Typing = () => {
   const [words, setWords] = useState<string>('');
-  const [seconds, setSeconds] = useState(0);
+  const [correctWordsTyped, setCorrectWordsTyped] = useState<string>('');
+  const [wordsTyped, setWordsTyped] = useState<string>('');
   const [index, setIndex] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [flowers, setFlowers] = useState<number>(0); // State to track the number of flowers
+  const router = useRouter();
 
-  const timer = useRef<NodeJS.Timeout | null>(null);
-  const accuracy = wordsTyped.length !== 0 ? Math.round((correctWordsTyped.length / wordsTyped.length) * 100) : 100;
-
-  //timer
-  if (timer.current === null && index > 0) {
-    var start = Date.now();
-    timer.current = setInterval(() => {
-      var elapsedTime = Date.now() - start; // milliseconds elapsed since start
-      setSeconds(Number((elapsedTime / 1000).toFixed(0))); // convert to number
-    }, 1000)
-  }
-  //must change to where it takes errors as well // const wpm = seconds !== 0 ? Math.round((wordsTyped.length / 5) / (seconds / 60)) : 0;
-  const wpm = seconds !== 0 ? Math.round((correctWordsTyped.length / 5) / (seconds / 60)) : 0;
-if (index === words.length - 1) {
-    if (timer.current !== null) {
-        clearInterval(timer.current);
-        timer.current = null;
-    }
-}
-
-
-  //fetch words from database, joined the words array into a string, and set the words and current character initialized
+  // Fetch words on component mount
   useEffect(() => {
-    const getWords = async () => {
-      const { tempArray } = await fetchWords();
-      const joinedWords = tempArray.join(' ');
-      setWords(joinedWords);
-    };
+    const fetchWords = async () => {
+      const res = await fetch('http://localhost:3000/api/words');
+      const words = await res.json();
+      const allWords = words.map((word: { words: any; }) => word.words).join(' ');
+      setWords(allWords);
+    }
+    fetchWords();
+  }, []);
 
-    getWords();
-
-}, []);
-
-useEffect(() => {
+  // Event handler for keyboard input
   const handleKeyDown = (e: KeyboardEvent) => {
-    switch (e.key) {
-      case 'Backspace':
-          setwordsTyped(prevwordsTyped => prevwordsTyped.slice(0, -1));
-          setIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    setIsRunning(true);
+    const { key } = e;
 
-        break;
-      default: 
-        if (e.key.length === 1) { //only a letter or punctuation 
-          setwordsTyped(prevwordsTyped => prevwordsTyped + e.key); //append all letters typed
-          setIndex((prevIndex) => prevIndex + 1)
-          if (e.key === words[index]) {
-            setCorrectWordsTyped(prevCorrectWordsTyped => prevCorrectWordsTyped + 1)
-          }
-        break;
+    if (key === 'Backspace') {
+      updateWordsAndIndex('', true);
+    } else if (key.length === 1) {
+      updateWordsAndIndex(e.key)
+
+      if (key === words[index]) {
+        setCorrectWordsTyped(prevCorrectWordsTyped => prevCorrectWordsTyped + 1);
+        setFlowers(prevFlowers => prevFlowers + 1); // Grow flowers when a correct word is typed
       }
     }
+
+    if (index === words.length - 1) {
+      setIsRunning(false);
+    }
   }
 
-  window.addEventListener('keydown', handleKeyDown); //keydown listener on window
-
-  return () => {
-    window.removeEventListener('keydown', handleKeyDown);
+  // Update words typed and index
+  const updateWordsAndIndex = (key: string, isBackspace: boolean = false) => {
+    setWordsTyped((prevWordsTyped: string) => isBackspace ? prevWordsTyped.slice(0, -1) : prevWordsTyped + key);
+    setIndex(prevIndex => isBackspace ? Math.max(prevIndex - 1, 0) : prevIndex + 1);
   }
-})
 
+  // Event listener setup and cleanup
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }
+  });
 
+  // Handle click event for the button
+  const handleClick = () => {
+    console.log("clicked")
+    router.refresh();
+  }
+
+  // Calculate words per minute
+  const seconds = useTimer(isRunning);
+  const wpm = seconds !== 0 ? Math.round((correctWordsTyped.length / 5) / (seconds / 60)) : 0;
 
   return (
-    <>
-      <div>Typing</div>
-      <div>{seconds} {wpm}</div>
-      <div className="p-10 text-3xl flex items-center justify-center">
-         <p className="text-gray-400"> 
-         
-         {words.split('').map((char, index) => {
-          let color;
-          if (index < wordsTyped.length) {
-            color = char === wordsTyped[index] ? 'black' : 'red';
-          }
-
-          return (
-          <span 
-            key={index} style={{ color: color}}>
-            {char}
-            {index === wordsTyped.length -1 && <span className="cursor"></span>}
-          </span>);
-
-         })}
-          </p>
-        </div>
-        <Link href="/typing" onClick={() => window.location.reload()}>New Test</Link>
-       
-      </>
-  )
+    <div className={styles.container}>
+      <div className={styles.wordContainer}>
+        <div className={styles.info}>{seconds} {wpm}</div>
+        <WordDisplay words={words} wordsTyped={wordsTyped} />
+      </div>
+      {/* <button className={styles.button} onClick={handleClick}>New Test</button> */}
+    </div>
+  );
 }
 
-
-export default Typing
+export default Typing;
