@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 // import Loading from '@/components/loading';
 import WordDisplay from '@/components/wordDisplay/wordDisplay';
-import Flowers from '@/components/flowers/flowers'; // Import Flowers component
 import { useTimer } from '@/hooks/useTimer';
 import styles from './typing.module.css';
 
