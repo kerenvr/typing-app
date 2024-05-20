@@ -1,0 +1,39 @@
+.container{
+    /* background-color: #e7e6ff; */
+    display: flex;
+    gap: 100px;
+    height: 600px;
+  }
+
+  .title{
+    color: #b5b0ff;
+    font-size: 70px;
+    font-weight: 700;
+
+  }
+
+  .imgContainer{
+    flex: 1;
+    position: relative;
+  }
+
+  .textContainer{
+    padding-top: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .desc{
+    font-size: 30px;
+    font-weight: 200;
+  }
+
+  .btn{
+    gap: 20px;
+    background-color: #6D63FE;
+    color: white;
+    
+  }
