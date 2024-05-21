@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: var(--bg);
+  /* background-color: var(--bg); */
   color: var(--text)
 }
 
@@ -20,7 +20,7 @@ a {
 }
 
 .cursor {
-    border-left: 2px solid black;
+    border-right: 2px solid black;
     animation: blink 1s infinite;
   }
   
@@ -29,11 +29,20 @@ a {
   }
 
   .container {
-    margin: auto;
-    padding-left: 50px;
-    padding-right: 50px;
-    min-height: 100vh;
+    /* background-color: aliceblue; */
+    max-width: 1300px;
+    margin : 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-wrap: wrap;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .navbar {
+    margin: auto;
+    max-width: 1500px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
