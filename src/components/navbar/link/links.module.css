@@ -3,3 +3,43 @@
     align-items: center;
     gap: 10px;
 }
+
+.menuBtn,
+.mobileLinks {
+  display: none;
+}
+
+@media (max-width: 768px) {
+    .links {
+      display: none;
+    }
+  
+    .menuBtn{
+      display: block;
+      cursor: pointer;
+    }
+
+    .activeContainer{
+        position: absolute;
+        margin-top: 40px;
+        right: 0;
+        left: 0;
+        padding: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        backdrop-filter: blur(10px);
+    }
+
+    .active{
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+        gap: 20px;
+        padding: 20px;
+        color: white;
+    }
+}
