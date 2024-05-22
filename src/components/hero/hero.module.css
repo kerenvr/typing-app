@@ -1,0 +1,33 @@
+.container{
+    min-height: 700px;
+    margin: auto;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .title{
+    color: var(--text);
+    font-size: clamp(3rem, 4vw, 70px);
+    font-weight: 300;
+
+  }
+
+  .textContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .desc{
+    font-size: clamp(1.5rem, 1.5vw, 30px);
+    font-weight: 200;
+    max-width: 450px;
+    text-align: center;
+  }
+

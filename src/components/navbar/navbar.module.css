@@ -1,11 +1,19 @@
 .container {
-    height: 100px;
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color: gray;
 }
 
 .logo {
+    color: var(--text);
     font-size: 30px;
     font-weight: bold;
 }
