@@ -1,14 +1,11 @@
-import styles from './typing.module.css'
+import styles from './typingPage.module.css'
 
-const BlogLayout = ({children}: {children: React.ReactNode}) => {
+const TypingLayout = ({children}: {children: React.ReactNode}) => {
     return (
-        <div>
-            <div className={styles.container}>
-                <h1>This is the Typing Page Layout</h1>
-            </div>
+        <div style={{ minHeight: 'calc(100vh - 100px)' }} className={` ${styles.container}`}>
             {children}
         </div>
     );
 };
 
-export default BlogLayout;
+export default TypingLayout;

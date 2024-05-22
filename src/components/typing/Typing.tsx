@@ -73,11 +73,9 @@ const Typing = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.wordContainer}>
-        <div className={styles.info}>{seconds} {wpm}</div>
+      <div className={` ${styles.wordContainer}`}>
         <WordDisplay words={words} wordsTyped={wordsTyped} />
       </div>
-      {/* <button className={styles.button} onClick={handleClick}>New Test</button> */}
     </div>
   );
 }

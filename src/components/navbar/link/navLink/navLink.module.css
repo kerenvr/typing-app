@@ -7,5 +7,7 @@
 
 
 .active {
-    outline: 2px solid var(--primary);
+    background-color: rgb(249, 249, 249);
+    border-radius: 30px;
+    color: black;
 }

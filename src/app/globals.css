@@ -5,13 +5,14 @@
 
 :root {
   --bg: white;
-  --text: #1B1A55;
+  --text: #434343;
   --primary: #B7C9F2;
+  --textPrimary: #b5b0ff;
 }
 
 body {
-  /* background-color: var(--bg); */
-  color: var(--text)
+  color: var(--text);
+  min-height: 90vh;
 }
 
 a {
@@ -27,22 +28,10 @@ a {
   @keyframes blink {
     50% { border-color: transparent; }
   }
-
-  .container {
-    /* background-color: aliceblue; */
-    max-width: 1300px;
-    margin : 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding-right: 30px;
-    padding-left: 30px;
-  }
-
+  
   .navbar {
     margin: auto;
-    max-width: 1500px;
+    max-width: 1600px;
     padding-left: 30px;
     padding-right: 30px;
   }
