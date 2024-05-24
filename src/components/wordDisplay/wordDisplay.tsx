@@ -4,9 +4,10 @@ import styles from './wordDisplay.module.css';
 interface WordDisplayProps {
     words: string;
     charsTyped: string;
+    wpm: number;
 }
 
-const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped }) => {
+const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => {
     const ref = useRef<HTMLSpanElement>(null);
     const pRef = useRef<HTMLDivElement>(null);
     const [y, setY] = useState<number>(0);
@@ -40,6 +41,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped }) => {
 
     return (
         <div className={styles.container}>
+            {wpm}
             <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
                 {words.split('').map((char, index) => {
                     let color;

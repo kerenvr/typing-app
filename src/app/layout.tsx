@@ -18,12 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-gradient-to-t from-rose-100 to-gray-50 ${inter.className}`}>
+      <body className={`bg-gradient-to-t from-rose-50 to-gray-50 ${inter.className}`}>
         <div className="navbar">
           <Navbar />
         </div>
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

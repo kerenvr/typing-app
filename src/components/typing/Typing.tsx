@@ -71,23 +71,19 @@ const Typing = () => {
     }
   });
 
-  // Handle click event for the button
-  const handleClick = () => {
-    console.log("clicked")
-    router.refresh();
-  }
-
   // Calculate words per minute
   const seconds = useTimer(isRunning);
-  const wpm = seconds !== 0 ? Math.round((correctCharsTyped.length / 5) / (seconds / 60)) : 0;
+  const wpm = seconds !== 0 ? Math.round((charsTyped.length / 5) / (seconds / 60)) : 0;
 
   return (
+    <>
     <div className={styles.container}>
-      <div className={styles.wpm}>[ {wpm} ]</div>
+      <div className={styles.wpm}>[ { seconds } ]</div>
       <div className={` ${styles.wordContainer}`}>
-        <WordDisplay words={words} charsTyped={charsTyped} />
+        <WordDisplay words={words} charsTyped={charsTyped} wpm={wpm}/>
       </div>
     </div>
+    </>
   );
 }
 
