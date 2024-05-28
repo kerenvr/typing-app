@@ -8,12 +8,12 @@ import styles from './typing.module.css';
 
 const Typing = () => {
   const [words, setWords] = useState<string>('');
-  const [correctWordsTyped, setCorrectWordsTyped] = useState<string>('');
-  const [wordsTyped, setWordsTyped] = useState<string>('');
+  const [correctCharsTyped, setCorrectCharsTyped] = useState<string>('');
+  const [charsTyped, setCharsTyped] = useState<string>('');
   const [index, setIndex] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [flowers, setFlowers] = useState<number>(0); // State to track the number of flowers
   const router = useRouter();
+  const [moveOn, setMoveOn] = useState<boolean>(true);
 
   // Fetch words on component mount
   useEffect(() => {
@@ -33,14 +33,24 @@ const Typing = () => {
 
     if (key === 'Backspace') {
       updateWordsAndIndex('', true);
-    } else if (key.length === 1) {
-      updateWordsAndIndex(e.key)
-
-      if (key === words[index]) {
-        setCorrectWordsTyped(prevCorrectWordsTyped => prevCorrectWordsTyped + 1);
-        setFlowers(prevFlowers => prevFlowers + 1); // Grow flowers when a correct word is typed
-      }
+      return;
     }
+    
+    if (key.length !== 1) {
+      return;
+    }
+    
+    if (key !== words[index]) {
+      if (moveOn) {
+        updateWordsAndIndex(e.key)
+      }
+      setMoveOn(false);
+      return;
+    }
+    
+    updateWordsAndIndex(e.key)
+    setCorrectCharsTyped(prevCorrectCharsTyped => prevCorrectCharsTyped + 1);
+    setMoveOn(true);
 
     if (index === words.length - 1) {
       setIsRunning(false);
@@ -49,7 +59,7 @@ const Typing = () => {
 
   // Update words typed and index
   const updateWordsAndIndex = (key: string, isBackspace: boolean = false) => {
-    setWordsTyped((prevWordsTyped: string) => isBackspace ? prevWordsTyped.slice(0, -1) : prevWordsTyped + key);
+    setCharsTyped((prevCharsTyped: string) => isBackspace ? prevCharsTyped.slice(0, -1) : prevCharsTyped + key);
     setIndex(prevIndex => isBackspace ? Math.max(prevIndex - 1, 0) : prevIndex + 1);
   }
 
@@ -61,22 +71,19 @@ const Typing = () => {
     }
   });
 
-  // Handle click event for the button
-  const handleClick = () => {
-    console.log("clicked")
-    router.refresh();
-  }
-
   // Calculate words per minute
   const seconds = useTimer(isRunning);
-  const wpm = seconds !== 0 ? Math.round((correctWordsTyped.length / 5) / (seconds / 60)) : 0;
+  const wpm = seconds !== 0 ? Math.round((charsTyped.length / 5) / (seconds / 60)) : 0;
 
   return (
+    <>
     <div className={styles.container}>
+      <div className={styles.wpm}>[ { seconds } ]</div>
       <div className={` ${styles.wordContainer}`}>
-        <WordDisplay words={words} wordsTyped={wordsTyped} />
+        <WordDisplay words={words} charsTyped={charsTyped} wpm={wpm}/>
       </div>
     </div>
+    </>
   );
 }
 
