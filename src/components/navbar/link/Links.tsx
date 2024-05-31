@@ -17,7 +17,7 @@ const links =[
     },
     {
         title: "Login",
-        path: "/auth/Login",
+        path: "/auth/login",
     },
 ];
 
