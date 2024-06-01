@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { LoginSchema } from "@/schemas";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,32 +25,20 @@ import { Login } from "../../../../actions/login";
 import { useState, useTransition } from "react";
 import { FormSuccess } from "@/components/auth/form-success";
 
-
-export const FormSchema = z.object({
-    username: z.string ({
-      message: "A username must be provided.",
-    }),
-    password: z.string().min(1, {
-      message: "A password must be provided.",
-    }),
-  });
-  
-  export type FormData = z.infer<typeof FormSchema>;
-
 export const LoginForm = () => {
     const [isPending, startTransition] = useTransition(); 
     const [error, setError] = useState<string | undefined>(undefined);
     const [success, setSuccess] = useState<string | undefined>(undefined);
 
     const form = useForm({
-        resolver: zodResolver(FormSchema),
+        resolver: zodResolver(LoginSchema),
         defaultValues: {
           username: "",
           password: "",
         },
       });
 
-      const onSubmit = async (data: FormData) => {
+      const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
         console.log(Login(data))
         setError("");
         setSuccess("");
@@ -89,6 +78,7 @@ export const LoginForm = () => {
                                         type="text"
                                     />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -107,6 +97,7 @@ export const LoginForm = () => {
                                         type="password"
                                     />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
