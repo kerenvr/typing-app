@@ -19,54 +19,44 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { CardWrapper } from "@/components/auth/card-wrapper"
-import { FormError } from "@/components/auth/form-error";
-import { Login } from "../../../../actions/login";
-import { useState, useTransition } from "react";
-import { FormSuccess } from "@/components/auth/form-success";
 
 
-export const FormSchema = z.object({
+const FormSchema = z.object({
     username: z.string ({
       message: "A username must be provided.",
     }),
     password: z.string().min(1, {
       message: "A password must be provided.",
     }),
+    name: z.string ({
+        message: "A name must be provided.",
+      }),
   });
   
-  export type FormData = z.infer<typeof FormSchema>;
+  type FormData = z.infer<typeof FormSchema>;
 
-export const LoginForm = () => {
-    const [isPending, startTransition] = useTransition(); 
-    const [error, setError] = useState<string | undefined>(undefined);
-    const [success, setSuccess] = useState<string | undefined>(undefined);
+export const RegisterForm = () => {
 
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
           username: "",
           password: "",
+          name: "",
         },
       });
 
       const onSubmit = async (data: FormData) => {
-        console.log(Login(data))
-        setError("");
-        setSuccess("");
-        startTransition(() => {
-            Login(data)
-            .then((data) => {
-                setError(data.error)
-                setSuccess(data.success)
-            })
-        });
+        console.log("Submitting form", data);
+    
+        const { username, password } = data;
       }
 
     return (
         <CardWrapper
-            headerLabel="Welcome Back"
-            backButtonLabel="Don't have an account? Sign up"
-            backButtonHref="/auth/register"
+            headerLabel="Create an Account"
+            backButtonLabel="Already have an account?"
+            backButtonHref="/auth/login"
             showSocial
         >
             <Form {...form} >
@@ -76,6 +66,23 @@ export const LoginForm = () => {
                 >
                     <FormField
                         control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        className="text-black"
+                                        placeholder="John Doe"
+                                        {...field}
+                                        type="text"
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="username"
                         render={({ field }) => (
                             <FormItem>
@@ -83,8 +90,7 @@ export const LoginForm = () => {
                                 <FormControl>
                                     <Input
                                         className="text-black"
-                                        disabled={isPending}
-                                        placeholder="username"
+                                        placeholder="john_doe"
                                         {...field}
                                         type="text"
                                     />
@@ -101,7 +107,6 @@ export const LoginForm = () => {
                                 <FormControl>
                                     <Input
                                         className="text-black"
-                                        disabled={isPending}
                                         placeholder="password"
                                         {...field}
                                         type="password"
@@ -110,14 +115,12 @@ export const LoginForm = () => {
                             </FormItem>
                         )}
                     />
-                    <FormError message={error}/>
-                    <FormSuccess message={success}/>
-                    <Button 
+                    <Button
                         type="submit"
                         className=""
                         variant="outline"
                     >
-                        Login
+                        Register
                     </Button>
                 </form>
             </Form>
