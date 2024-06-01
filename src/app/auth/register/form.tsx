@@ -4,8 +4,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { RegisterSchema } from "@/schemas";
 import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -24,19 +24,6 @@ import { Register } from "../../../../actions/register";
 import { useState, useTransition } from "react";
 import { FormSuccess } from "@/components/auth/form-success";
 
-export const FormSchema = z.object({
-    name: z.string().min(6, {
-        message: "A name must be provided.",
-    }),
-    username: z.string({
-        message: "A username must be provided.",
-    }),
-    password: z.string().min(6, {
-        message: "A password must be provided.",
-    }),
-});
-
-export type FormData = z.infer<typeof FormSchema>;
 
 export const RegisterForm = () => {
     const [isPending, startTransition] = useTransition();
@@ -44,7 +31,7 @@ export const RegisterForm = () => {
     const [success, setSuccess] = useState<string | undefined>(undefined);
 
     const form = useForm({
-        resolver: zodResolver(FormSchema),
+        resolver: zodResolver(RegisterSchema),
         defaultValues: {
             name: "",
             username: "",
@@ -52,10 +39,10 @@ export const RegisterForm = () => {
         },
     });
 
-    const onSubmit = async (data: FormData) => {
-        console.log(Register(data));
+    const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
         setError("");
         setSuccess("");
+
         startTransition(() => {
             Register(data).then((data) => {
                 setError(data.error);
@@ -91,6 +78,7 @@ export const RegisterForm = () => {
                                         type="text"
                                     />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -109,6 +97,7 @@ export const RegisterForm = () => {
                                         type="text"
                                     />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -127,6 +116,7 @@ export const RegisterForm = () => {
                                         type="password"
                                     />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -140,3 +130,5 @@ export const RegisterForm = () => {
         </CardWrapper>
     );
 };
+
+
