@@ -8,58 +8,70 @@ import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
-import { CardWrapper } from "@/components/auth/card-wrapper"
+import { CardWrapper } from "@/components/auth/card-wrapper";
+import { FormError } from "@/components/auth/form-error";
+import { Register } from "../../../../actions/register";
+import { useState, useTransition } from "react";
+import { FormSuccess } from "@/components/auth/form-success";
 
-
-const FormSchema = z.object({
-    username: z.string ({
-      message: "A username must be provided.",
-    }),
-    password: z.string().min(1, {
-      message: "A password must be provided.",
-    }),
-    name: z.string ({
+export const FormSchema = z.object({
+    name: z.string().min(6, {
         message: "A name must be provided.",
-      }),
-  });
-  
-  type FormData = z.infer<typeof FormSchema>;
+    }),
+    username: z.string({
+        message: "A username must be provided.",
+    }),
+    password: z.string().min(6, {
+        message: "A password must be provided.",
+    }),
+});
+
+export type FormData = z.infer<typeof FormSchema>;
 
 export const RegisterForm = () => {
+    const [isPending, startTransition] = useTransition();
+    const [error, setError] = useState<string | undefined>(undefined);
+    const [success, setSuccess] = useState<string | undefined>(undefined);
 
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-          username: "",
-          password: "",
-          name: "",
+            name: "",
+            username: "",
+            password: "",
         },
-      });
+    });
 
-      const onSubmit = async (data: FormData) => {
-        console.log("Submitting form", data);
-    
-        const { username, password } = data;
-      }
+    const onSubmit = async (data: FormData) => {
+        console.log(Register(data));
+        setError("");
+        setSuccess("");
+        startTransition(() => {
+            Register(data).then((data) => {
+                setError(data.error);
+                setSuccess(data.success);
+            });
+        });
+    };
 
     return (
         <CardWrapper
-            headerLabel="Create an Account"
-            backButtonLabel="Already have an account?"
+            headerLabel="Register"
+            backButtonLabel="Already have an account? Sign in"
             backButtonHref="/auth/login"
             showSocial
         >
-            <Form {...form} >
+            <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="flex flex-col space-y-4 w-full"
@@ -73,7 +85,8 @@ export const RegisterForm = () => {
                                 <FormControl>
                                     <Input
                                         className="text-black"
-                                        placeholder="John Doe"
+                                        disabled={isPending}
+                                        placeholder="name"
                                         {...field}
                                         type="text"
                                     />
@@ -90,7 +103,8 @@ export const RegisterForm = () => {
                                 <FormControl>
                                     <Input
                                         className="text-black"
-                                        placeholder="john_doe"
+                                        disabled={isPending}
+                                        placeholder="username"
                                         {...field}
                                         type="text"
                                     />
@@ -107,6 +121,7 @@ export const RegisterForm = () => {
                                 <FormControl>
                                     <Input
                                         className="text-black"
+                                        disabled={isPending}
                                         placeholder="password"
                                         {...field}
                                         type="password"
@@ -115,15 +130,13 @@ export const RegisterForm = () => {
                             </FormItem>
                         )}
                     />
-                    <Button
-                        type="submit"
-                        className=""
-                        variant="outline"
-                    >
+                    <FormError message={error} />
+                    <FormSuccess message={success} />
+                    <Button type="submit" className="" variant="outline">
                         Register
                     </Button>
                 </form>
             </Form>
         </CardWrapper>
     );
-}
+};
