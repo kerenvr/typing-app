@@ -4,8 +4,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { RegisterSchema } from "@/schemas";
 import * as z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -23,7 +23,9 @@ import { FormError } from "@/components/auth/form-error";
 import { Register } from "../../../../actions/register";
 import { useState, useTransition } from "react";
 import { FormSuccess } from "@/components/auth/form-success";
+import { RegisterSchema } from "@/schemas";
 
+export type FormData = z.infer<typeof RegisterSchema>;
 
 export const RegisterForm = () => {
     const [isPending, startTransition] = useTransition();
@@ -33,16 +35,15 @@ export const RegisterForm = () => {
     const form = useForm({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
-            name: "",
+            email: "",
             username: "",
             password: "",
         },
     });
 
-    const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
+    const onSubmit = async (data: FormData) => {
         setError("");
         setSuccess("");
-
         startTransition(() => {
             Register(data).then((data) => {
                 setError(data.error);
@@ -65,20 +66,19 @@ export const RegisterForm = () => {
                 >
                     <FormField
                         control={form.control}
-                        name="name"
+                        name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Name</FormLabel>
+                                <FormLabel>Email</FormLabel>
                                 <FormControl>
                                     <Input
                                         className="text-black"
                                         disabled={isPending}
-                                        placeholder="name"
+                                        placeholder="email"
                                         {...field}
-                                        type="text"
+                                        type="email"
                                     />
                                 </FormControl>
-                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -97,7 +97,6 @@ export const RegisterForm = () => {
                                         type="text"
                                     />
                                 </FormControl>
-                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -116,7 +115,6 @@ export const RegisterForm = () => {
                                         type="password"
                                     />
                                 </FormControl>
-                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -130,5 +128,3 @@ export const RegisterForm = () => {
         </CardWrapper>
     );
 };
-
-
