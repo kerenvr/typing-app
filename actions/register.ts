@@ -4,7 +4,7 @@
 import * as z from "zod";
 import bcrypt from "bcrypt";
 import { RegisterSchema } from "@/schemas";
-import { getUserByEmail, getUserByUsername } from "../data/user";
+import { getUserByEmail, getUserByUsername } from "../src/data/user";
 
 import { PrismaClient } from '@prisma/client'
 
