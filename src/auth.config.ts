@@ -1,13 +1,13 @@
 import Credentials from "next-auth/providers/credentials"
 import type { NextAuthConfig } from "next-auth"
 import { LoginSchema } from "@/schemas"
-import { getUserByUsername } from "@/data/user";
+import { getUserByUsername } from "../data/user";
 import bcrypt from "bcryptjs";
  
 export default { 
     providers: [
         Credentials({
-            async authorize(credentials) {
+            async authorize(credentials: Partial<Record<string, unknown>>) {
                 const validatedFields = LoginSchema.safeParse(credentials);
 
                 if (validatedFields.success) {

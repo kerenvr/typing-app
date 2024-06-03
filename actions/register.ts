@@ -4,13 +4,13 @@
 import * as z from "zod";
 import bcrypt from "bcrypt";
 import { RegisterSchema } from "@/schemas";
-import { getUserByEmail, getUserByUsername } from "../src/data/user";
-
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { getUserByEmail, getUserByUsername } from "../data/user";
+import { prisma } from "@/lib/db";
 
 export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
+    const response = await prisma.user.findMany();
+    console.log(response);
+
     const result = RegisterSchema.safeParse(values);
 
     if (!result.success) {
@@ -32,13 +32,18 @@ export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
         return {error: "That username is taken!"}
     } 
     
-    await prisma.user.create({
-        data: {
-            email,
-            username,
-            password: hashedPassword,
-        },
-    })
+    try {
+        await prisma.user.create({
+            data: {
+                email,
+                username,
+                password: hashedPassword,
+            },
+        });
+    } catch (error) {
+        console.error('Error creating user:', error);
+        return { error: 'Error creating user.' };
+    }
 
     return { success: "Success!" };
 }

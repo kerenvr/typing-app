@@ -1,7 +1,5 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -39,15 +37,14 @@ export const LoginForm = () => {
       });
 
       const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
-        console.log(Login(data))
         setError("");
         setSuccess("");
         startTransition(() => {
             Login(data)
-            .then((data) => {
-                setError(data.error)
-                setSuccess(data.success)
-            })
+            // .then((data) => {
+            //     setError(data.error)
+            //     setSuccess(data.success)
+            // })
         });
       }
 
