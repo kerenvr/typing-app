@@ -9,6 +9,32 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
+    async signIn({ user, account }) {
+      console.log("USER: ", user)
+      console.log("ACCOUNT: ", account)
+      if (account && account.provider === "google") {
+        try {
+          const res = await fetch ("http://localhost:3000/api/user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+              name: user.name,
+              email: user.email,
+            })
+          })
+
+          if (res.ok) {
+            return user;
+          }
+        } catch (error) {
+          console.log(error )
+          
+        }
+      }
+      return user;
+    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;

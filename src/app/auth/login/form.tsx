@@ -36,17 +36,17 @@ export const LoginForm = () => {
         },
       });
 
-      const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
+    const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
         setError("");
         setSuccess("");
         startTransition(() => {
-            Login(data)
-            // .then((data) => {
-            //     setError(data.error)
-            //     setSuccess(data.success)
-            // })
+                Login(data)
+                .then((data) => {
+                        setError(data?.error) // Add null check here
+                        setSuccess(data?.success) // Add null check here
+                })
         });
-      }
+    }
 
     return (
         <CardWrapper
