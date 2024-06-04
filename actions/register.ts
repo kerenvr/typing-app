@@ -8,16 +8,14 @@ import { getUserByEmail, getUserByUsername } from "../data/user";
 import { prisma } from "@/lib/db";
 
 export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
-    const response = await prisma.user.findMany();
-    console.log(response);
-
+    
     const result = RegisterSchema.safeParse(values);
 
     if (!result.success) {
         return { error: result.error.message };
     }
 
-    const { email, username, password } = values;
+    const { name, email, username, password } = values;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingEmail = await getUserByEmail(email);
@@ -38,6 +36,7 @@ export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
                 email,
                 username,
                 password: hashedPassword,
+                name,
             },
         });
     } catch (error) {
