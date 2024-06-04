@@ -35,6 +35,7 @@ export const RegisterForm = () => {
     const form = useForm({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
+            name: "",
             email: "",
             username: "",
             password: "",
@@ -64,6 +65,24 @@ export const RegisterForm = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="flex flex-col space-y-4 w-full"
                 >
+                <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        className="text-black"
+                                        disabled={isPending}
+                                        placeholder="name"
+                                        {...field}
+                                        type="text"
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="email"
