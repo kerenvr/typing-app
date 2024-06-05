@@ -22,13 +22,23 @@ export const {
     }
   },
   callbacks: {
-    async signIn({ user, account}) {
+    async signIn({ user }) {
+      // try {
+      //   await prisma.user.create({
+      //     data: {
+      //       email: user.email,
+      //       name: user.name ?? "",
+      //     }
+      //   });
 
-      if (account?.provider !== "credentials") return true;
+      // } catch (error) {
+      //   console.error('Error creating user:', error);
+      // }
 
-      const existingUser = await getUserById(user.id);
-
-      if (!existingUser?.emailVerified) return false;
+      if (user.id) {
+        const existingUser = await getUserById(user.id);
+        if (!existingUser?.emailVerified) return false;
+      }
 
       return true;
     },

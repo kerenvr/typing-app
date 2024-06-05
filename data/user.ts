@@ -37,7 +37,8 @@ export const getUserById = async (id: string) => {
         });
 
         return user;
-    } catch {
+    } catch (error) {
+        console.error('Error fetching user by id:', error);
         return null;
     }
 }

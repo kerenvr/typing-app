@@ -10,11 +10,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^2.1.0",
+    "@auth/prisma-adapter": "^2.2.0",
     "@hookform/resolvers": "^3.4.2",
     "@libsql/client": "^0.6.2",
     "@prisma/adapter-libsql": "^5.14.0",
-    "@prisma/client": "^5.14.0",
+    "@prisma/client": "^5.15.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/bcryptjs": "^2.4.6",

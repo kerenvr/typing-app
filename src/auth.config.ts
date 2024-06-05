@@ -5,8 +5,11 @@ import { getUserByUsername } from "../data/user";
 import bcrypt from "bcryptjs";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { prisma } from "./lib/db"; 
  
 export default { 
+    adapter: PrismaAdapter(prisma),
     providers: [
         GitHub({
             clientId: process.env.GITHUB_CLIENT_ID,
@@ -33,5 +36,5 @@ export default {
                 return null;
             }
         })
-    ] 
+    ], 
 } satisfies NextAuthConfig
