@@ -6,6 +6,8 @@ import bcrypt from "bcrypt";
 import { RegisterSchema } from "@/schemas";
 import { getUserByEmail, getUserByUsername } from "../data/user";
 import { prisma } from "@/lib/db";
+import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationEmail } from "@/lib/mail";
 
 export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
     
@@ -39,10 +41,24 @@ export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
                 name,
             },
         });
+
+        const verificationToken = await generateVerificationToken(email);
+
+        if (verificationToken) {
+            await sendVerificationEmail(
+                verificationToken.email,
+                verificationToken.token,
+            )
+        } else {
+            console.error('Error sending email.');
+
+            return { error: "Error sending verification email." };
+        }
+
     } catch (error) {
         console.error('Error creating user:', error);
         return { error: 'Error creating user.' };
     }
 
-    return { success: "Success!" };
+    return { success: "Confirmation Email Sent!" };
 }

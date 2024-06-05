@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import authConfig from "./auth.config"
-import { getUserById } from "../data/user";
+import { prisma } from "@/lib/db";
+import { getUserById, getUserByEmail } from "../data/user";
  
 export const {
   auth,
@@ -8,32 +9,28 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error"
+  },
+  events: {
+    async linkAccount({ user }) {
+      await prisma.user.update({
+        where: {id: user.id},
+        data: { emailVerified: new Date()}
+      })
+    }
+  },
   callbacks: {
-    async signIn({ user, account }) {
-      console.log("USER: ", user)
-      console.log("ACCOUNT: ", account)
-      if (account && account.provider === "google") {
-        try {
-          const res = await fetch ("http://localhost:3000/api/user", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-              name: user.name,
-              email: user.email,
-            })
-          })
+    async signIn({ user, account}) {
 
-          if (res.ok) {
-            return user;
-          }
-        } catch (error) {
-          console.log(error )
-          
-        }
-      }
-      return user;
+      if (account?.provider !== "credentials") return true;
+
+      const existingUser = await getUserById(user.id);
+
+      if (!existingUser?.emailVerified) return false;
+
+      return true;
     },
     async session({ token, session }) {
       if (token.sub && session.user) {
