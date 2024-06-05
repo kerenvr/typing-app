@@ -33,20 +33,19 @@ export const LoginForm = () => {
     const form = useForm({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
-          username: "",
+          email: "",
           password: "",
         },
       });
 
       const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
-        console.log(Login(data))
         setError("");
         setSuccess("");
         startTransition(() => {
             Login(data)
             .then((data) => {
-                setError(data.error)
-                setSuccess(data.success)
+                setError(data?.error)
+                setSuccess(data?.success)
             })
         });
       }
@@ -65,15 +64,15 @@ export const LoginForm = () => {
                 >
                     <FormField
                         control={form.control}
-                        name="username"
+                        name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>Email</FormLabel>
                                 <FormControl>
                                     <Input
                                         className="text-black"
                                         disabled={isPending}
-                                        placeholder="username"
+                                        placeholder="email"
                                         {...field}
                                         type="text"
                                     />
