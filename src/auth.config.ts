@@ -6,9 +6,12 @@ import Credentials from 'next-auth/providers/credentials';
 import { LoginSchema } from "./schemas";
 import bcrypt from 'bcrypt';
 import { findUserByEmail } from "../data/user";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import prisma from "@/lib/db";
  
 // Notice this is only an object, not a full Auth.js instance
 export default {
+  adapter: PrismaAdapter(prisma),
   providers: [
     GitHub({
         clientId: process.env.GITHUB_CLIENT_ID,
