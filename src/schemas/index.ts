@@ -2,7 +2,7 @@ import * as z from "zod";
 
 
 export const LoginSchema = z.object({
-    username: z.string({
+    email: z.string({
         message: "A username must be provided.",
     }),
     password: z.string().min(6, {
@@ -14,7 +14,7 @@ export const RegisterSchema = z.object({
     name: z.string().min(6, {
         message: "A name must be provided.",
     }),
-    username: z.string({
+    email: z.string({
         message: "A username must be provided.",
     }),
     password: z.string().min(6, {

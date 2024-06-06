@@ -1,7 +1,5 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { RegisterSchema } from "@/schemas";
@@ -34,7 +32,7 @@ export const RegisterForm = () => {
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             name: "",
-            username: "",
+            email: "",
             password: "",
         },
     });
@@ -84,15 +82,15 @@ export const RegisterForm = () => {
                     />
                     <FormField
                         control={form.control}
-                        name="username"
+                        name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>Email</FormLabel>
                                 <FormControl>
                                     <Input
                                         className="text-black"
                                         disabled={isPending}
-                                        placeholder="username"
+                                        placeholder="email"
                                         {...field}
                                         type="text"
                                     />
