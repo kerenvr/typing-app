@@ -16,10 +16,10 @@ export const {
     error: "/auth/error"
   },
   events: {
-    async linkAccount({ user }) {
+    async linkAccount({ user }) { //triggered when new account linked to a user
       await prisma.user.update({
-        where: {id: user.id},
-        data: { emailVerified: new Date()}
+        where: {id: user.id}, //get user by id
+        data: { emailVerified: new Date()} //update date
       })
     }
   },
@@ -35,24 +35,28 @@ export const {
         if (!existingUser?.emailVerified) return false;
       }
 
+      //allow sign in 
       return true;
     },
+    //callback for when session() is called
     async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
+      if (token.sub && session.user) { //id and user exist
+        session.user.id = token.sub; //session.user does not come with id
+        //so we need to create an id, and set it to the token.sub 
+        //which is the user id in the database
       }
 
-      return session;
+      return session; //allow session
     },
-    async jwt({ token }) { 
+    async jwt({ token }) { //callback when JWT token is created
   
-      if (!token.sub) return token;
+      if (!token.sub) return token; //user id does not exist
 
-      const existingUser = await getUserById(token.sub);
+      const existingUser = await getUserById(token.sub); //find user by id
 
-      if (!existingUser) return token;
+      if (!existingUser) return token; //user does not exist
 
-      return token;
+      return token; //return token
       
     }
   },
