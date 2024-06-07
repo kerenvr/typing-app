@@ -1,7 +1,8 @@
 import NextAuth from "next-auth"
 import authConfig from "./auth.config"
-import { prisma } from "@/lib/db";
 import { getUserById, getUserByEmail } from "../data/user";
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { prisma } from "./lib/db"; 
  
 export const {
   auth,
@@ -9,6 +10,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/auth/login",
     error: "/auth/error"
@@ -22,21 +24,14 @@ export const {
     }
   },
   callbacks: {
-    async signIn({ user }) {
-      // try {
-      //   await prisma.user.create({
-      //     data: {
-      //       email: user.email,
-      //       name: user.name ?? "",
-      //     }
-      //   });
-
-      // } catch (error) {
-      //   console.error('Error creating user:', error);
-      // }
-
+    async signIn({ user, account }) {
+      //if there is a user
       if (user.id) {
-        const existingUser = await getUserById(user.id);
+        //email verification not needed for providers like Google
+        if (account?.provider !== "credentials") return true;
+        const existingUser = await getUserById(user.id); //find user in the db
+
+        //see their email verification status, if not verified, deny log in
         if (!existingUser?.emailVerified) return false;
       }
 
