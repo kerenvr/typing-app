@@ -1,5 +1,11 @@
 import * as z from "zod";
 
+export const NewPasswordSchema = z.object({
+    password: z.string().min(6, {
+        message: "A password must be provided.",
+    }),
+});
+
 export const ResetSchema = z.object({
     email: z.string().min(1, {
         message: "An email must be provided.",
