@@ -16,7 +16,6 @@ export const generateVerificationToken = async (email: string) => {
         })
     }
         try {
-            console.log("prisma: ", prisma)
             const verificationToken = await prisma.verificationToken.create({
                 data: {
                     email,
