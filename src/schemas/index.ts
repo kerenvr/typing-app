@@ -1,5 +1,17 @@
 import * as z from "zod";
 
+export const UpdateProfileSchema = z.object({
+    name: z.string().min(1, {
+        message: "A name must be provided.",
+    }),
+    username: z.string({
+        message: "A username must be provided.",
+    }),
+    email: z.string().min(1, {
+        message: "An email must be provided.",
+    }),
+});
+
 export const ResetSchema = z.object({
     email: z.string().min(1, {
         message: "An email must be provided.",
