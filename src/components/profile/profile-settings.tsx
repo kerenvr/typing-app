@@ -20,9 +20,11 @@ import { FormError } from "@/components/auth/form-error";
 import { Update } from "../../../actions/update"
 import { useState, useTransition } from "react";
 import { FormSuccess } from "@/components/auth/form-success";
-import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export const ProfileSettingsForm= () => {
+  const { data: session, update } = useSession();
+  const user = session?.user;
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
@@ -30,21 +32,28 @@ export const ProfileSettingsForm= () => {
   const form = useForm({
     resolver: zodResolver(UpdateProfileSchema),
     defaultValues: {
-      name: "",
-      username: "",
-      email: "",
+      name: user?.name || undefined,
+      username: user?.username || undefined,
+      email: user?.email || undefined,
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof UpdateProfileSchema>) => {
+  const onSubmit = async (values: z.infer<typeof UpdateProfileSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      Update(data)
+      Update(values)
         .then((data) => {
-          setError(data?.error);
-          setSuccess(data?.success);
-        });
+          if (data.error) {
+            setError(data.error)
+          };
+          if (data.success) {
+            update();
+            setSuccess(data.success);
+            window.location.reload()
+          }
+        })
+        .catch (() => setError("Something went wrong!"))
     });
   };
 
@@ -117,11 +126,11 @@ export const ProfileSettingsForm= () => {
           <button type="submit" className=" bg-[#F8FAFC] p-2 rounded-full text-sm w-1/2">Save Changes</button>
         </form>
       </Form>
-      <Form {...form}>
+      {/* <Form {...form}>
       <p className="text-slate-500 text-xs">Password</p>
 
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          // onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col space-y-4 w-full"
         >
             
@@ -189,7 +198,7 @@ export const ProfileSettingsForm= () => {
             Reset Password
           </Button>
         </form>
-      </Form>
+      </Form> */}
     </div>
   );
 };

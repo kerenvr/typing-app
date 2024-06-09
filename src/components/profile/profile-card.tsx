@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { auth, signOut } from '@/auth';
 export const ProfileCard = async () => {
     const session = await auth();
+    const token = await auth();
 
     return (
         <>
@@ -20,7 +21,7 @@ export const ProfileCard = async () => {
                         <h1 className="text-2xl font-semibold pb-3">{session.user.name}</h1>
                         <div className="flex flex-col justify-center items-center">
                             <p className="text-xs ">{session.user.email}</p>
-                            <p className="text-xs ">k18v</p>
+                            <p className="text-xs ">{session.user.username}</p>
                         </div>
 
                     </div>
