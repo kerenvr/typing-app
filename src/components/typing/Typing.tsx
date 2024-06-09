@@ -78,7 +78,10 @@ const Typing = () => {
   return (
     <>
     <div className={styles.container}>
-      <div className={styles.wpm}>[ { seconds } ]</div>
+      <div className="flex justify-between w-full">
+        <div className={styles.wpm}>[ { seconds } ]</div>
+        <div className={styles.wpm}>[ { wpm } ]</div>
+      </div>
       <div className={` ${styles.wordContainer}`}>
         <WordDisplay words={words} charsTyped={charsTyped} wpm={wpm}/>
       </div>

@@ -41,7 +41,6 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     return (
         <div className={styles.container}>
-            {wpm}
             <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
                 {words.split('').map((char, index) => {
                     let color;

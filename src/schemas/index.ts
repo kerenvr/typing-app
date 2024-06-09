@@ -1,15 +1,15 @@
 import * as z from "zod";
 
+export const ChangePasswordSchema = z.object({
+    password: z.string().min(6, {
+        message: "Password must be at least 6 characters long.",
+    }),
+});
+
 export const UpdateProfileSchema = z.object({
-    name: z.string().min(1, {
-        message: "A name must be provided.",
-    }),
-    username: z.string({
-        message: "A username must be provided.",
-    }),
-    email: z.string().min(1, {
-        message: "An email must be provided.",
-    }),
+    name: z.optional(z.string()),
+    username: z.optional(z.string()),
+    email: z.optional(z.string()),
 });
 
 export const ResetSchema = z.object({
@@ -19,11 +19,11 @@ export const ResetSchema = z.object({
 });
 
 export const LoginSchema = z.object({
-    username: z.string({
+    username: z.string().min(1, {
         message: "A username must be provided.",
     }),
     password: z.string().min(6, {
-        message: "A password must be provided.",
+        message: "Password must be at least 6 characters long.",
     }),
 });
 
@@ -38,6 +38,6 @@ export const RegisterSchema = z.object({
         message: "A username must be provided.",
     }),
     password: z.string().min(6, {
-        message: "A password must be provided.",
+        message: "Password must be at least 6 characters long.",
     }),
 });

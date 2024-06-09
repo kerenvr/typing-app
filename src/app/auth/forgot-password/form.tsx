@@ -53,6 +53,7 @@ export const ResetPasswordForm = () => {
       headerLabel="Reset Password"
       backButtonLabel="Back to Login"
       backButtonHref="/auth/login"
+      width="w-[400px]"
     >
       <Form {...form}>
         <form

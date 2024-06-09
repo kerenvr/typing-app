@@ -3,6 +3,7 @@ import authConfig from "./auth.config"
 import { getUserById, getUserByEmail } from "../data/user";
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/db"; 
+import { getAccountByUserId } from "../data/account";
  
 export const {
   auth,
@@ -46,6 +47,15 @@ export const {
         //which is the user id in the database
       }
 
+      if (session.user) {
+        session.user.name = token.name;
+        session.user.username = token.username;
+        
+        if (token.email) { //because it can be null or undefined
+          session.user.email = token.email;
+      }
+        session.user.isOAuth = token.isOAuth as boolean; 
+    }
       return session; //allow session
     },
     async jwt({ token }) { //callback when JWT token is created
@@ -55,6 +65,16 @@ export const {
       const existingUser = await getUserById(token.sub); //find user by id
 
       if (!existingUser) return token; //user does not exist
+
+      const existingAccount = getAccountByUserId(
+        existingUser.id
+      );
+
+      token.isOAuth = !!existingAccount;
+
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.username = existingUser.username;
 
       return token; //return token
       
