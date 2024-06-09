@@ -15,7 +15,7 @@ const Hero: React.FC<HeroProps> = ({ title, description }) => {
                 </div>
                 <p className={styles.desc}>{description}</p>
             </div>
-            <button className="btn w-36 bg-stone-600 text-white  py-2 rounded-3xl text-xl">type now</button>
+            <button className="btn w-36 outline text-white py-2 rounded-3xl text-xl">type now</button>
         </div>
     );
 };
