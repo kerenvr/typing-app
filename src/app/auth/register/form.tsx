@@ -59,7 +59,7 @@ export const RegisterForm = () => {
             backButtonLabel="Already have an account? Sign in"
             backButtonHref="/auth/login"
             showSocial
-            width="w-[450px]"
+            width="w-[400px]"
         >
             <Form {...form}>
                 <form
