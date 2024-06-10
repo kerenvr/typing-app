@@ -53,6 +53,7 @@ export const LoginForm = () => {
       backButtonLabel="Don't have an account? Sign up"
       backButtonHref="/auth/register"
       showSocial
+      width="w-[400px]"
     >
       <Form {...form}>
         <form
