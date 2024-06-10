@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { UpdateProfileSchema } from "@/schemas";
+import { UpdatePasswordSchema } from "@/schemas";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,12 +17,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/auth/form-error";
-import { Update } from "../../../actions/update"
+import { UpdatePassword } from "../../../actions/update-password";
 import { useState, useTransition } from "react";
 import { FormSuccess } from "@/components/auth/form-success";
 import { useSession } from "next-auth/react";
 
-export const ProfileSettingsForm= () => {
+export const PasswordSettingsForm = () => {
   const { data: session, update } = useSession();
   const user = session?.user;
   const [isPending, startTransition] = useTransition();
@@ -30,56 +30,51 @@ export const ProfileSettingsForm= () => {
   const [success, setSuccess] = useState<string | undefined>(undefined);
 
   const form = useForm({
-    resolver: zodResolver(UpdateProfileSchema),
+    resolver: zodResolver(UpdatePasswordSchema),
     defaultValues: {
-      name: user?.name || undefined,
-      username: user?.username || undefined,
-      email: user?.email || undefined,
+      currPassword: "",
+      newPassword: "",
+      repeatNewPassword: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof UpdateProfileSchema>) => {
+  const onSubmit = async (values: z.infer<typeof UpdatePasswordSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      Update(values)
+      UpdatePassword(values)
         .then((data) => {
           if (data?.error) {
-            setError(data.error)
-          };
+            setError(data.error);
+          }
           if (data?.success) {
             update();
             setSuccess(data.success);
-            window.location.reload()
           }
         })
-        .catch (() => setError("Something went wrong!"))
+        .catch(() => setError("Something went wrong!"));
     });
   };
 
   return (
     <div className="bg-white rounded-[40px] space-y-4 px-12 py-10  shadow-2xl ">
       <Form {...form}>
-        <h1 className="font-semibold text-xl">Profile</h1>
-        <p className="text-[#9D9D9D] text-sm">User information</p>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4 w-full"
-        >
-            
-            <FormField
+        <p className="text-slate-500 text-xs">Password</p>
+
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4 w-full">
+          <FormField
             control={form.control}
-            name="name"
+            name="currPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Current Password</FormLabel>
                 <FormControl>
                   <Input
                     className="text-black"
                     disabled={isPending}
                     {...field}
-                    type="text"
-                    placeholder={user?.name}
+                    type="password"
+                    placeholder="************"
                   />
                 </FormControl>
                 <FormMessage />
@@ -88,17 +83,17 @@ export const ProfileSettingsForm= () => {
           />
           <FormField
             control={form.control}
-            name="username"
+            name="newPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>New Password</FormLabel>
                 <FormControl>
                   <Input
                     className="text-black"
                     disabled={isPending}
                     {...field}
-                    type="text"
-                    placeholder={user?.username}
+                    type="password"
+                    placeholder="************"
                   />
                 </FormControl>
                 <FormMessage />
@@ -107,17 +102,17 @@ export const ProfileSettingsForm= () => {
           />
           <FormField
             control={form.control}
-            name="email"
+            name="repeatNewPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Repeat New Password</FormLabel>
                 <FormControl>
                   <Input
                     className="text-black"
                     disabled={isPending}
                     {...field}
-                    type="email"
-                    placeholder={user?.email}
+                    type="password"
+                    placeholder="************"
                   />
                 </FormControl>
                 <FormMessage />
@@ -126,7 +121,9 @@ export const ProfileSettingsForm= () => {
           />
           <FormError message={error} />
           <FormSuccess message={success} />
-          <button type="submit" className=" bg-[#F8FAFC] p-2 rounded-full text-sm w-1/2">Save Changes</button>
+          <button type="submit" className="bg-[#F8FAFC] p-2 rounded-full text-sm w-1/2">
+            Save Changes
+          </button>
         </form>
       </Form>
     </div>

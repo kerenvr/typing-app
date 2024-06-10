@@ -1,3 +1,4 @@
+import { PasswordSettingsForm } from "@/components/profile/password-settings.tsx";
 import { ProfileCard } from "@/components/profile/profile-card";
 import { ProfileSettingsForm } from '@/components/profile/profile-settings';
 import { SessionProvider } from "next-auth/react";
@@ -10,8 +11,13 @@ const Account = () => {
                 <div className="w-full">
                     <ProfileCard />
                 </div>
-                <div className="w-full">
-                    <ProfileSettingsForm />
+                <div className="flex flex-col w-full space-y-3">
+                    <div className="w-full">
+                        <ProfileSettingsForm />
+                    </div>
+                    <div className="w-full">
+                        <PasswordSettingsForm />
+                    </div>
                 </div>
             </div>
         </div>

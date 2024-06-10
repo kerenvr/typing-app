@@ -1,7 +1,13 @@
 import * as z from "zod";
 
-export const ChangePasswordSchema = z.object({
-    password: z.string().min(6, {
+export const UpdatePasswordSchema = z.object({
+    currPassword: z.string().min(6, {
+        message: "Password must be at least 6 characters long.",
+    }),
+    newPassword: z.string().min(6, {
+        message: "Password must be at least 6 characters long.",
+    }),
+    repeatNewPassword: z.string().min(6, {
         message: "Password must be at least 6 characters long.",
     }),
 });
