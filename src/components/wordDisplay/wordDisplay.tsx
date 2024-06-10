@@ -31,7 +31,19 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
         }
     }, [charsTyped]);
 
+    //TODO: do not hardcode the 322, find a way to get that value..
     useEffect(() => {
+        if (y === 322.8984375) {
+            marginTopRef.current = marginTopRef.current + (fontSize * THRESHOLD);
+            setMarginTop(marginTopRef.current);
+            return;
+        }
+        
+        if (y === prevY) {
+            marginTopRef.current = marginTopRef.current - (fontSize * THRESHOLD);
+            setMarginTop(marginTopRef.current);
+        }
+
         if (prevY !== y && prevY !== 0 && prevY < y) {
             marginTopRef.current = marginTopRef.current - (fontSize * THRESHOLD);
             setMarginTop(marginTopRef.current);
@@ -44,13 +56,20 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
             <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
                 {words.split('').map((char, index) => {
                     let color;
-                    let decoration;
+                    let bgColor;
                     if (index < charsTyped.length) {
-                        color = char === charsTyped[index] ? '#8FA38F' : '#f87171';
-                        decoration = 'underline';
+                        color = char === charsTyped[index] ? '#a5b4fc' : 'white';
+                        bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
+
                     }
                     return (
-                        <span key={index} style={{ color, textDecoration: decoration }}>
+                        <span key={index} 
+                              style={{ 
+                                backgroundColor: bgColor,
+                                color,
+                                borderRadius: '10px', 
+                                padding: '5px',
+                                }}>
                             {char}
                             {index === charsTyped.length - 1 && <span ref={ref} className="cursor"></span>}
                         </span>

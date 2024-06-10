@@ -1,32 +1,34 @@
-.container{
-    display: flex;  
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
 }
 
-.wordContainer{
-    max-width: 1000px;
-    font-size: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    max-height: 4.85em;
-    overflow-y: hidden;
-    user-select: none;
-    color: #74726F;
+.wordContainer {
+  max-width: 1000px;
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-height: 2.85em;
+  overflow-y: hidden;
+  user-select: none;
+  color: white;
 }
 
 .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.wpm{
-    font-size: 34px;
-    color: #8FA38F;
+.wpm {
+  font-size: 34px;
+  color: #8fa38f;
 }
+
+/* WordDisplay.module.css */
