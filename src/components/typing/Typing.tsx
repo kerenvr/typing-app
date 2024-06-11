@@ -14,6 +14,7 @@ const Typing = () => {
   const [isRunning, setIsRunning] = useState(false);
   const router = useRouter();
   const [moveOn, setMoveOn] = useState<boolean>(true);
+  const [backSpace, setBackSpace] = useState<boolean>(true);
 
   // Fetch words on component mount
   useEffect(() => {
@@ -31,7 +32,7 @@ const Typing = () => {
     setIsRunning(true);
     const { key } = e;
 
-    if (key === 'Backspace') {
+    if (key === 'Backspace' && backSpace) {
       updateWordsAndIndex('', true);
       return;
     }
@@ -79,8 +80,6 @@ const Typing = () => {
     <>
     <div className={styles.container}>
       <div className="flex justify-between w-full">
-        <div className={styles.wpm}>[ { seconds } ]</div>
-        <div className={styles.wpm}>[ { wpm } ]</div>
       </div>
       <div className={` ${styles.wordContainer}`}>
         <WordDisplay words={words} charsTyped={charsTyped} wpm={wpm}/>
