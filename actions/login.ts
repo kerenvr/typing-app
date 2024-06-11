@@ -20,7 +20,6 @@ export const Login = async  (values: z.infer<typeof LoginSchema>) => {
     
     
     if (!existingUser || !existingUser.username || !existingUser.password) {
-        console.log("EXUSER: ", existingUser)
         return { error: "Invalid credentials!" }
     }
 
