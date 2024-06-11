@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import authConfig from "./auth.config"
-import { getUserById, getUserByEmail } from "../data/user";
+import { getUserById } from "../data/user";
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/db"; 
 import { getAccountByUserId } from "../data/account";
@@ -26,16 +26,15 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
+
+      const provider = account?.provider;
       //if there is a user
       if (user.id) {
-        //email verification not needed for providers like Google
-        if (account?.provider !== "credentials") return true;
+        if (provider !== "credentials") return true;  //email verification not needed for providers like Google
         const existingUser = await getUserById(user.id); //find user in the db
-
         //see their email verification status, if not verified, deny log in
         if (!existingUser?.emailVerified) return false;
       }
-
       //allow sign in 
       return true;
     },
@@ -47,13 +46,9 @@ export const {
         //which is the user id in the database
       }
 
-      if (session.user) {
-        session.user.name = token.name;
+      //passing extra info to the session
+      if (session.user && token.email) {
         session.user.username = token.username;
-        
-        if (token.email) { //because it can be null or undefined
-          session.user.email = token.email;
-      }
         session.user.isOAuth = token.isOAuth as boolean; 
     }
       return session; //allow session
@@ -71,9 +66,6 @@ export const {
       );
 
       token.isOAuth = !!existingAccount;
-
-      token.name = existingUser.name;
-      token.email = existingUser.email;
       token.username = existingUser.username;
 
       return token; //return token
@@ -81,6 +73,14 @@ export const {
     }
   },
 
-  session: { strategy: "jwt" },
+  session: { 
+    strategy: "jwt",
+    maxAge:  2 * 60 * 60, //2 hours
+
+  },
+
+  jwt: {
+    maxAge: 2 * 60 * 60,
+  },
   ...authConfig,
 })

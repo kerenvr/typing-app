@@ -52,7 +52,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     return (
         <div className={styles.container}>
-            <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
+            <p ref={pRef} className={`bg-gradient-to-r from-rose-400 to-fuchsia-500 text-transparent bg-clip-text ${styles.words}`} style={{ marginTop: `${marginTop}px` }}>
                 {words.split('').map((char, index) => {
                     let color;
                     let bgColor;

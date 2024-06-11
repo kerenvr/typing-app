@@ -57,7 +57,7 @@ export const PasswordSettingsForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-[40px] space-y-4 px-12 py-10  shadow-2xl ">
+    <div className="bg-white round ed-[40px] space-y-4 px-12 py-10  shad ow-2xl ">
       <Form {...form}>
         <p className="text-slate-500 text-xs">Password</p>
 
