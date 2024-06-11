@@ -31,9 +31,8 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
         }
     }, [charsTyped]);
 
-    //TODO: do not hardcode the 322, find a way to get that value..
     useEffect(() => {
-        if (y === 322.8984375) {
+        if ((prevY - y) === (fontSize * 3)) {
             marginTopRef.current = marginTopRef.current + (fontSize * THRESHOLD);
             setMarginTop(marginTopRef.current);
             return;
