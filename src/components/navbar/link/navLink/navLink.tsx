@@ -13,7 +13,10 @@ interface NavLinkProps {
 const NavLink = ({ item }: NavLinkProps) => {
     const pathName = usePathname() 
     return (
-        <Link className={`${styles.container} ${pathName === item.path && styles.active}`} href={item.path}>{item.title}</Link>
+        <Link className={
+            `${styles.container} 
+             ${pathName === item.path && styles.active}`} 
+             href={item.path}>{item.title}</Link>
     )
     
 }
