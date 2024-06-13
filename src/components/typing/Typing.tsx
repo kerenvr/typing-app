@@ -6,8 +6,13 @@ import WordDisplay from '@/components/wordDisplay/wordDisplay';
 import { useTimer } from '@/hooks/useTimer';
 import styles from './typing.module.css';
 
+interface Word {
+  id: number;
+  words: string;
+}
+
 const Typing = () => {
-  const [words, setWords] = useState<string>('');
+  const [words, setWords] = useState<Word[]>([]);
   const [correctCharsTyped, setCorrectCharsTyped] = useState<string>('');
   const [charsTyped, setCharsTyped] = useState<string>('');
   const [index, setIndex] = useState(0);
@@ -21,8 +26,7 @@ const Typing = () => {
     const fetchWords = async () => {
       const res = await fetch('http://localhost:3000/api/words');
       const words = await res.json();
-      const allWords = words.map((word: { words: any; }) => word.words).join(' ');
-      setWords(allWords);
+      setWords(words);
     }
     fetchWords();
   }, []);
@@ -32,38 +36,10 @@ const Typing = () => {
     setIsRunning(true);
     const { key } = e;
 
-    if (key === 'Backspace' && backSpace) {
-      updateWordsAndIndex('', true);
-      return;
-    }
-    
-    if (key.length !== 1) {
-      return;
-    }
-    
-    if (key !== words[index]) {
-      if (moveOn) {
-        updateWordsAndIndex(e.key)
-      }
-      setMoveOn(false);
-      return;
-    }
-    
-    updateWordsAndIndex(e.key)
-    setCorrectCharsTyped(prevCorrectCharsTyped => prevCorrectCharsTyped + 1);
-    setMoveOn(true);
+    console.log(key);
 
-    if (index === words.length - 1) {
-      setIsRunning(false);
-    }
   }
-
-  // Update words typed and index
-  const updateWordsAndIndex = (key: string, isBackspace: boolean = false) => {
-    setCharsTyped((prevCharsTyped: string) => isBackspace ? prevCharsTyped.slice(0, -1) : prevCharsTyped + key);
-    setIndex(prevIndex => isBackspace ? Math.max(prevIndex - 1, 0) : prevIndex + 1);
-  }
-
+    
   // Event listener setup and cleanup
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -78,13 +54,18 @@ const Typing = () => {
 
   return (
     <>
-    <div className={styles.container}>
-      <div className="flex justify-between w-full">
+      <div className={styles.container}>
+        <div className={` ${styles.wordContainer}`}>
+            {words.map((item, index) => (
+              <div key={index} className={styles.word}>
+                {item.words.split('').map((letter, index) => (
+                  <div className={styles.letter} key={index}>{letter}</div>
+                ))}
+                <div>&nbsp;</div>
+              </div>
+            ))}
+        </div>
       </div>
-      <div className={` ${styles.wordContainer}`}>
-        <WordDisplay words={words} charsTyped={charsTyped} wpm={wpm}/>
-      </div>
-    </div>
     </>
   );
 }
