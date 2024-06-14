@@ -1,11 +1,17 @@
 .container {
   background-color: orange;
   font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .wordContainer {
   display: flex;
   flex-wrap: wrap;
+  max-height: 3.1em;
+  overflow-y: hidden;
 }
 
 .word{
