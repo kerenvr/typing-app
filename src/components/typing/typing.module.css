@@ -1,5 +1,5 @@
 .container {
-  background-color: orange;
+  /* background-color: orange; */
   font-size: 32px;
   display: flex;
   flex-direction: column;
@@ -18,6 +18,27 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.letter {
+  color: gray;
+}
+
+.activeWord {
+  color: gold
+}
+
+.activeLetter{
+  color:aqua;
+}
+
+.correct{
+  color: green;
+}
+
+.incorrect{
+  color: red;
+}
+
 .loading {
   display: flex;
   justify-content: center;

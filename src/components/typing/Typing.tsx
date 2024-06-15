@@ -7,38 +7,65 @@ import { useTimer } from '@/hooks/useTimer';
 import styles from './typing.module.css';
 
 interface Word {
-  words: string;
+  word: string;
 }
 
 const Typing = () => {
   const [words, setWords] = useState<Word[]>([]);
-  const [currentWord, setCurrentWordIndex] = useState<string>('');
-  const [key, setKey] = useState<string>('');
+  const [currentWord, setCurrentWord] = useState<string>('');
+  const [index, setIndex] = useState<number>(0);
+  const [splitWord, setSplitWord] = useState<string[]>([]);
+  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
+  const [isCorrect, setIsCorrect] = useState<boolean>();
 
   // Fetch words on component mount
   useEffect(() => {
     const fetchWords = async () => {
       const res = await fetch('http://localhost:3000/api/words');
-      const words = await res.json();
-      setWords(words);
+      const dbWords = await res.json();
+      setWords(dbWords);
 
-      if (words.length > 0) {
-        setCurrentWordIndex(words[0].word);
-      }
-      
+      setCurrentWord(dbWords[currentWordIndex].word + " ") //starts at first word
     }
     fetchWords();
   }, []);
 
+  useEffect(() => {
+    const split = currentWord.split('') 
+    setSplitWord(split);
+  }, [currentWord])
+
+
   // Event handler for keyboard input
   const handleKeyDown = (e: KeyboardEvent) => {
     const { key } = e;
-    setKey(key)
+    console.log(key, splitWord[index])
 
-    console.log(key);
+    if (key === ' ') {
+      setCurrentWordIndex(prevCurrentWordIndex => prevCurrentWordIndex + 1);
+      setIndex(-1)
+    }
+
+    if (key.length !== 1) return;
+
+    if (key === splitWord[index]) {
+      console.log("true!")
+      setIsCorrect(true);
+      setIndex(prevIndex => prevIndex + 1)
+
+    } else {
+      console.log("false!")
+      setIsCorrect(false)
+    }
 
   }
-    
+
+  useEffect(() => {
+    if (words[currentWordIndex]) {
+      setCurrentWord(words[currentWordIndex].word + " ");
+    }
+  }, [currentWordIndex, words])
+
   // Event listener setup and cleanup
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -56,10 +83,15 @@ const Typing = () => {
     <div>{currentWord}</div>
       <div className={styles.container}>
         <div className={` ${styles.wordContainer}`}>
-            {words.map((item, index) => (
-              <div key={index} className={styles.word}>
-                {item.words.split('').map((letter, index) => (
-                  <div className={styles.letter} key={index}>{letter}</div>
+            {words.map((wordObject, wordIndex) => (
+              <div key={wordIndex} 
+                className={`${styles.word} `}
+              >
+                {wordObject.word.split('').map((letter, letterIndex) => (
+                  <div className={`${styles.letter} ${wordIndex === currentWordIndex ? (letterIndex === index ? styles.activeLetter : styles.activeWord) : ''}`}
+                                  key={letterIndex}>
+                    {letter}
+                  </div>
                 ))}
                 <div>&nbsp;</div>
               </div>
