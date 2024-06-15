@@ -21,7 +21,7 @@ const Typing = () => {
     const fetchWords = async () => {
       const res = await fetch('http://localhost:3000/api/words');
       const words = await res.json();
-      const allWords = words.map((word: { words: any; }) => word.words).join(' ');
+      const allWords = words.map((words: { word: any; }) => words.word).join(' ');
       setWords(allWords);
     }
     fetchWords();
