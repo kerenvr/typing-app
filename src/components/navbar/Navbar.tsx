@@ -7,7 +7,7 @@ const NavBar = () => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-            <LuFlower className="w-10 h-10"/>
+            <p className="font-thin text-indigo-400">bloomtype</p>
             </div>
             <div>
                 <Links />

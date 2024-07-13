@@ -1,34 +1,38 @@
-.container{
-    min-height: 700px;
-    margin: auto;
-    max-width: 1300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-  }
+/* Container */
+.container {
+  min-height: 700px;
+  margin: auto;
+  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
 
-  .title{
-    color: white;
-    font-size: 80px;
-    font-weight: 500;
+/* Title */
+.title {
+  font-size: clamp(2rem, 5vw, 80px); /* Adjust the min, preferred, and max values as needed */
+  font-weight: 500;
+  text-align: center;
+  /* Optional: Add additional styling like text shadow if needed */
+}
 
-  }
+/* Text Container */
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
-  .textContainer{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .desc{
-    font-size: clamp(1.5rem, 1.5vw, 30px);
-    font-weight: 300;
-    max-width: 450px;
-    text-align: center;
-    color: white;
-  }
-
+/* Description */
+.desc {
+  font-size: clamp(1rem, 3vw, 1.5rem); /* Adjust the min, preferred, and max values as needed */
+  text-align: center;
+  font-family: sans-serif;
+  color: #c9c9c9;
+  font-weight: 200;
+  text-transform: lowercase;
+}
