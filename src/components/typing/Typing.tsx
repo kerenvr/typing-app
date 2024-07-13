@@ -155,7 +155,7 @@ const Typing = () => {
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
-        <h2 className="text-indigo-500">Word Lists</h2>
+        <h2 className="text-indigo-500 font-thin text-lg">Word Lists</h2>
         <button onClick={() => handleWordListChange(wordsArray)} className={styles.sidebarButton}>
           Default 
           <p className="font-thin text-xs">11 words</p>
