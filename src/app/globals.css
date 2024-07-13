@@ -96,9 +96,3 @@ a {
     50% { border-color: transparent; }
   }
   
-  .navbar {
-    margin: auto;
-    max-width: 1600px;
-    padding-left: 30px;
-    padding-right: 30px;
-  }

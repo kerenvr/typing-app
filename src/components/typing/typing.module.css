@@ -1,32 +1,50 @@
-.container{
-    display: flex;  
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-}
-
-.wordContainer{
-    max-width: 1000px;
-    font-size: 32px;
+.container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    max-height: 4.85em;
-    overflow-y: hidden;
-    user-select: none;
-    color: #74726F;
-}
-
-.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100vh;
+    width: 200px;
+    background-color: #eef2ff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebarButton {
+    display: block;
     width: 100%;
-}
-
-.wpm{
-    font-size: 34px;
-    color: #8FA38F;
-}
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border: none;
+    background-color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebarButton:hover {
+    background-color: #e0e7ff;
+    color: #6366f1;
+  }
+  
+  .mainContent {
+    margin-left: 220px;
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  .wpm {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .wordContainer {
+    margin-top: 20px;
+    font-size: 25px;
+    color:#cbd5e1;
+  }
+  
