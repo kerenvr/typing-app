@@ -8,7 +8,7 @@ import { debounce } from 'lodash';
 
 const links =[
     {
-        title: "Homepage",
+        title: "Home",
         path: "/",
     },
     {
@@ -43,7 +43,7 @@ const Links = () => {
         <div className={styles.container}>
             <div className={styles.links}> 
                 {links.map((link => (
-                    <NavLink item = {link} key ={link.title} />
+                    <NavLink item={link} key={link.title} />
                 )))}
             </div>
             <Image 
@@ -54,15 +54,15 @@ const Links = () => {
                 height={30}
                 onClick={() => setOpen((prev) => !prev)}
             />
-      {open && (
-        <div className={styles.activeContainer}>
-            <div className={styles.active}>
-            {links.map((link) => (
-                <NavLink item={link} key={link.title} />
-            ))}
-            </div>
-        </div>
-      )}
+            {open && (
+                <div className={styles.activeContainer}>
+                    <div className={styles.active}>
+                        {links.map((link) => (
+                            <NavLink item={link} key={link.title} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

@@ -12,9 +12,10 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  max-height: 2.85em;
+  max-height: 4.85em;
   overflow-y: hidden;
   user-select: none;
+
 }
 
 .loading {

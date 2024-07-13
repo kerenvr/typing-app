@@ -1,14 +1,13 @@
 .container {
-    margin-top: 30px;
-    border-radius: 50px;
-    height: 50px;
+    padding-left: 98px;
+    padding-right: 98px;
+    height: 63px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 30px;
-    padding-right: 30px;
-    outline: 3px solid var(--text);
+    outline: 1px solid #f1f1f1;
     background-color: white;
+    text-transform: lowercase;
 }
 
 .logo {

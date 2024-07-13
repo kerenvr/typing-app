@@ -73,17 +73,13 @@
 :root {
   --bg: white;
   --text: #434343;
-  --primary: #B7C9F2;
-  --textPrimary: #b5b0ff;
+  --primary: #E3BFFF;
 }
 
 body {
   color: var(--text);
   min-height: 96.7vh;
   background-color: #ffffff;
-opacity: 1;
-background-image:  linear-gradient(#f6f6f6 1px, transparent 1px), linear-gradient(to right, #f6f6f6 1px, #ffffff 1px);
-background-size: 20px 20px;
 }
 
 a {
@@ -103,6 +99,4 @@ a {
   .navbar {
     margin: auto;
     max-width: 1600px;
-    padding-left: 30px;
-    padding-right: 30px;
   }

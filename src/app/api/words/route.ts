@@ -5,7 +5,7 @@ import pool from "@/lib/mysql";
 export async function GET() {
     try {
         const db = await pool.getConnection();
-        const query = "SELECT * FROM words WHERE LENGTH(word) <= 5 ORDER BY RAND() LIMIT 200";
+        const query = "SELECT * FROM common WHERE LENGTH(word) <= 5 ORDER BY RAND() LIMIT 3";
         const [rows] = await db.execute(query)
         db.release()
 

@@ -1,5 +1,9 @@
 import * as z from "zod";
 
+export const wpmSchema = z.object({
+    wpm: z.number().max(3)
+});
+
 export const UpdatePasswordSchema = z.object({
     currPassword: z.string().min(6, {
         message: "Password must be at least 6 characters long.",
@@ -47,3 +51,5 @@ export const RegisterSchema = z.object({
         message: "Password must be at least 6 characters long.",
     }),
 });
+
+export const ThreeCharNumberSchema = z.number().min(100).max(999);

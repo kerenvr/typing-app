@@ -19,6 +19,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Image from "next/image";
 
 const NavBar = async () => {
     const session = await auth();
@@ -26,7 +27,8 @@ const NavBar = async () => {
     return (
         <div className={styles.container}>
             <div className={styles.logo}>
-                <LuFlower className="w-10 h-10" />
+                {/* <Image src="Logo.svg" alt="flower logo" height={50} width={50}  /> */}
+                <h1 className="text-sm text-indigo-500 font-bold">bloomtype</h1>
             </div>
             <div className="flex justify-center items-center space-x-2">
                 <Links />

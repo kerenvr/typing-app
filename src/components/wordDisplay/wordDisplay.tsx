@@ -4,10 +4,9 @@ import styles from './wordDisplay.module.css';
 interface WordDisplayProps {
     words: string;
     charsTyped: string;
-    wpm: number;
 }
 
-const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => {
+const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped}) => {
     const ref = useRef<HTMLSpanElement>(null);
     const pRef = useRef<HTMLDivElement>(null);
     const [y, setY] = useState<number>(0);
@@ -58,7 +57,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
                     let bgColor;
                     if (index < charsTyped.length) {
                         color = char === charsTyped[index] ? '#a5b4fc' : 'white';
-                        bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
+                        bgColor = char === charsTyped[index] ? 'transparent' : '#f87171'; 
 
                     }
                     return (
@@ -66,8 +65,8 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
                               style={{ 
                                 backgroundColor: bgColor,
                                 color,
-                                borderRadius: '10px', 
-                                padding: '5px',
+                            
+                                padding: '2px',
                                 }}>
                             {char}
                             {index === charsTyped.length - 1 && <span ref={ref} className="cursor"></span>}
