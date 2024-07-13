@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Karla } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar"
-import Footer from "@/components/footer/Footer"
 
 const karla = Karla({ subsets: ["latin"] });
 
@@ -23,7 +22,6 @@ export default function RootLayout({
           <Navbar />
         </div>
         {children}
-        {/* <Footer /> */}
       </body>
     </html>
   );
