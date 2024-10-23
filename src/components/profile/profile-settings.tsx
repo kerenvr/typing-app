@@ -79,7 +79,7 @@ export const ProfileSettingsForm= () => {
                     disabled={isPending}
                     {...field}
                     type="text"
-                    placeholder={user?.name}
+                    placeholder={user?.name ?? undefined}
                   />
                 </FormControl>
                 <FormMessage />
@@ -98,7 +98,7 @@ export const ProfileSettingsForm= () => {
                     disabled={isPending}
                     {...field}
                     type="text"
-                    placeholder={user?.username}
+                    placeholder={user?.username ?? undefined}
                   />
                 </FormControl>
                 <FormMessage />
@@ -117,7 +117,7 @@ export const ProfileSettingsForm= () => {
                     disabled={isPending}
                     {...field}
                     type="email"
-                    placeholder={user?.email}
+                    placeholder={user?.email ?? undefined}
                   />
                 </FormControl>
                 <FormMessage />

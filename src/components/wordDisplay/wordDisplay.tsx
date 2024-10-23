@@ -52,8 +52,33 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     return (
         <div className={styles.container}>
-            {words}
-        </div>
+        <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
+            {words.split('').map((char, index) => {
+                let color;
+                let bgColor;
+                let underline;
+                if (index < charsTyped.length) {
+                    color = char === charsTyped[index] ? '#a5b4fc' : '#f87171';
+                    underline = char === charsTyped[index] ? 'none' : 'underline';
+                    bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
+
+                }
+                return (
+                    <span key={index} 
+                          style={{ 
+                            textDecoration: underline,
+                            textDecorationColor: bgColor,
+                            color,
+                            borderRadius: '10px', 
+                            padding: '5px',
+                            }}>
+                        {char}
+                        {index === charsTyped.length - 1 && <span ref={ref} className="cursor"></span>}
+                    </span>
+                );
+            })}
+        </p>
+    </div>
     );
 };
 

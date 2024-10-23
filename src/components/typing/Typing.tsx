@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import WordDisplay from '@/components/wordDisplay/wordDisplay';
 import { useTimer } from '@/hooks/useTimer';
 import styles from './typing.module.css';
+import DifficultySelector from '../difficulty-setting/index';
 
 const Typing = () => {
   const [words, setWords] = useState<string>('');
@@ -14,18 +15,18 @@ const Typing = () => {
   const [isRunning, setIsRunning] = useState(false);
   const router = useRouter();
   const [moveOn, setMoveOn] = useState<boolean>(true);
-  const difficulty = 1;
-
+  const [difficulty, setDifficulty] = useState<string>('1');
   // Fetch words on component mount
   useEffect(() => {
     const fetchWords = async () => {
       const res = await fetch(`/api/words?difficulty=${difficulty}`); // Fetch words with difficulty
       const words = await res.json();
+      console.log('Fetched Words:', words);
       const allWords = words.map((word: { word: string }) => word.word).join(' '); // Adjust according to your model
       setWords(allWords);
     };
     fetchWords();
-  }, []);
+  }, [difficulty]);
 
   // Event handler for keyboard input
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -78,6 +79,7 @@ const Typing = () => {
 
   return (
     <>
+    <DifficultySelector setDifficulty={setDifficulty} difficulty={difficulty} />    
     <div className={styles.container}>
       <div className="flex justify-between w-full">
         <div className={styles.wpm}>[ { seconds } ]</div>
