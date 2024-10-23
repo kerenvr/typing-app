@@ -19,26 +19,6 @@
   flex-wrap: wrap;
 }
 
-.letter {
-  color: gray;
-}
-
-.activeWord {
-  color: gold
-}
-
-.activeLetter{
-  color:aqua;
-}
-
-.correct{
-  color: green;
-}
-
-.incorrect{
-  color: red;
-}
-
 .loading {
   display: flex;
   justify-content: center;
@@ -47,8 +27,28 @@
 }
 
 .wpm {
-  font-size: 34px;
-  color: #8fa38f;
+ 
+}
+
+
+.dashboard{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    font-size: 20px;
+    gap: 30px;
+    color: #a5b4ec;
+    outline: auto;
+    border-radius: 10px; 
+    padding: 10px;
+    margin-bottom: 30px;
+
+}
+
+.wpmtime{
+    display: flex;
+    align-items: start;
+    gap: 20px;
 }
 
 /* WordDisplay.module.css */

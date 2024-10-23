@@ -1,0 +1,14 @@
+.btn{
+    display: flex;
+    gap: 10px;
+}
+
+.container{
+    display: flex;
+    gap: 30px;
+}
+
+.changedifficulty{
+    display: flex;
+    gap: 10px;
+}

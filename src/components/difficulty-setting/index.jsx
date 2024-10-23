@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import styles from "./difficulty-setting.module.css";
+
 
 const DifficultySelector = ({ setDifficulty, difficulty }) => {
   // State to hold the current difficulty level
@@ -11,15 +13,19 @@ const DifficultySelector = ({ setDifficulty, difficulty }) => {
 
 
   return (
-    <div>
-    <h2>Current Difficulty: {difficulty}</h2>
+    <div className={styles.container}>
+    <h2>Level: {difficulty}</h2>
 
-      <div>
-        {['1', '2', '3', '4', '5'].map((level) => (
-          <button key={level} onClick={() => handleDifficultyChange(level)}>
-            {level}
-          </button>
-        ))}
+    <div className={styles.changedifficulty}>
+        <h2>Change Level: </h2>
+
+        <div className={styles.btn}>
+            {['1', '2', '3', '4', '5'].map((level) => (
+            <button key={level} onClick={() => handleDifficultyChange(level)}>
+                {level}
+            </button>
+            ))}
+        </div>
       </div>
     </div>
   );

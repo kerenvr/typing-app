@@ -6,6 +6,7 @@ import WordDisplay from '@/components/wordDisplay/wordDisplay';
 import { useTimer } from '@/hooks/useTimer';
 import styles from './typing.module.css';
 import DifficultySelector from '../difficulty-setting/index';
+import { cn } from '@/lib/utils';
 
 const Typing = () => {
   const [words, setWords] = useState<string>('');
@@ -79,12 +80,14 @@ const Typing = () => {
 
   return (
     <>
-    <DifficultySelector setDifficulty={setDifficulty} difficulty={difficulty} />    
-    <div className={styles.container}>
-      <div className="flex justify-between w-full">
-        <div className={styles.wpm}>[ { seconds } ]</div>
-        <div className={styles.wpm}>[ { wpm } ]</div>
+    <div className={styles.dashboard}>
+      <div className={styles.wpmtime}>
+          <div className={styles.wpm}> time: { seconds } </div>
+          <div className={styles.wpm}>wpm: { wpm } </div>
+        </div>  
+        <DifficultySelector setDifficulty={setDifficulty} difficulty={difficulty} />  
       </div>
+    <div className={styles.container}>
       <div className={` ${styles.wordContainer}`}>
         <WordDisplay words={words} charsTyped={charsTyped} wpm={wpm}/>
       </div>
