@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Reddit_Mono } from "next/font/google";
+import { Karla } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar"
-import Footer from "@/components/footer/Footer"
 
-const reddit_Mono = Reddit_Mono({ subsets: ["latin"] });
+const karla = Karla({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,12 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className={` ${karla.className}`}>
         <div className="navbar">
           <Navbar />
         </div>
         {children}
-        {/* <Footer /> */}
       </body>
     </html>
   );
