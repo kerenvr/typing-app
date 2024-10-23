@@ -14,15 +14,16 @@ const Typing = () => {
   const [isRunning, setIsRunning] = useState(false);
   const router = useRouter();
   const [moveOn, setMoveOn] = useState<boolean>(true);
+  const difficulty = 1;
 
   // Fetch words on component mount
   useEffect(() => {
     const fetchWords = async () => {
-      const res = await fetch('http://localhost:3000/api/words');
+      const res = await fetch(`/api/words?difficulty=${difficulty}`); // Fetch words with difficulty
       const words = await res.json();
-      const allWords = words.map((word: { words: any; }) => word.words).join(' ');
+      const allWords = words.map((word: { word: string }) => word.word).join(' '); // Adjust according to your model
       setWords(allWords);
-    }
+    };
     fetchWords();
   }, []);
 

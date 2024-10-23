@@ -1,18 +1,14 @@
-//https://datalab.medium.com/nextjs-14-json-api-with-mysql-9f635b5ecb1d
-import { NextResponse } from "next/server";
-import pool from "@/lib/mysql";
+// app/api/words/route.ts
+
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/db';
 
 export async function GET() {
     try {
-        const db = await pool.getConnection();
-        const query = "SELECT * FROM words WHERE LENGTH(words) <= 5 ORDER BY RAND() LIMIT 60";
-        const [rows] = await db.execute(query)
-        db.release()
-
-        return NextResponse.json(rows)
+        const words = await prisma.wordBank.findMany();
+        return NextResponse.json(words);
     } catch (error) {
-        return NextResponse.json({
-            error: error
-        }, { status: 500 })
+        console.error('Error fetching words:', error);
+        return NextResponse.json({ error: 'Error fetching words' }, { status: 500 });
     }
 }

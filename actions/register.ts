@@ -35,6 +35,7 @@ export const Register = async  (values: z.infer<typeof RegisterSchema>) => {
     try {
         await prisma.user.create({
             data: {
+                id: crypto.randomUUID(),
                 email,
                 username,
                 password: hashedPassword,
