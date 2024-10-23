@@ -1,8 +1,8 @@
-"use client"; // Ensure this component is client-side
-
-import { useRouter } from 'next/navigation'; // Use the new import path for useRouter
 import styles from './hero.module.css';
-import { TiKeyboard } from 'react-icons/ti';
+import Image from 'next/image';
+import { TiKeyboard } from "react-icons/ti";
+import { Montserrat } from "next/font/google";
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 interface HeroProps {
     title: string;
@@ -10,26 +10,22 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ title, description }) => {
-    const router = useRouter(); // Initialize useRouter
-
-    const handleClick = () => {
-        router.push('/typing'); // Redirect to /typing page
-    };
-
     return (
         <div className={styles.container}>
             <div className={styles.textContainer}>
                 <div className={styles.title}>
                     <h1>{title}</h1>
                 </div>
-                <p className={styles.desc}>{description}</p>
+                <p className={`${montserrat.className} ${styles.desc}`}>{description}</p>
             </div>
-            <button
-                onClick={handleClick} // Add onClick handler
-                className="btn outline bg-indigo-500 text-white px-6 py-2 rounded-full text-md font-semibold flex justify-center items-center space-x-3"
-            >
-                <div>Start Typing</div>
-            </button>
+
+            <div className="relative inline-flex group">
+                <div className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
+                    <div className='relative inline-flex items-center justify-center space-x-4 px-8 py-2 text-lgtransition-all duration-200 font-pj bg-[var(--text)] text-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'>
+                        <TiKeyboard className="w-10 h-10 text-blue-100" />
+                        <div className="select-none bg-gradient-to-r from-[#ceeeff] via-[#ffd3fb] to-[#ffb4b0] text-transparent bg-clip-text">start typing</div>
+                    </div>
+            </div>
         </div>
     );
 };

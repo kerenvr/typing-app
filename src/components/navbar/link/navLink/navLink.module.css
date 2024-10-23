@@ -1,13 +1,13 @@
 .container {
     min-width: 100px;
     padding: 5px;
-    font-weight: 300;
+    font-weight: 600;
     text-align: center;
 }
 
 
 .active {
-    background-color: #6366f1;
+    background-color: rgb(249, 249, 249);
     border-radius: 30px;
-    color: white;
+    color: black;
 }

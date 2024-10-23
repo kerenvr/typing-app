@@ -1,50 +1,54 @@
 .container {
-    display: flex;
-  }
-  
-  .sidebar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    height: 100vh;
-    width: 200px;
-    background-color: #eef2ff;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sidebarButton {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    text-align: left;
-    border: none;
-    background-color: #ffffff;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .sidebarButton:hover {
-    background-color: #e0e7ff;
-    color: #6366f1;
-  }
-  
-  .mainContent {
-    margin-left: 220px;
-    padding: 20px;
-    flex-grow: 1;
-  }
-  
-  .wpm {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .wordContainer {
-    margin-top: 20px;
-    font-size: 25px;
-    color:#cbd5e1;
-  }
-  
+  /* background-color: orange; */
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.wordContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 3.1em;
+  overflow-y: hidden;
+}
+
+.word{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.letter {
+  color: gray;
+}
+
+.activeWord {
+  color: gold
+}
+
+.activeLetter{
+  color:aqua;
+}
+
+.correct{
+  color: green;
+}
+
+.incorrect{
+  color: red;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.wpm {
+  font-size: 34px;
+  color: #8fa38f;
+}
+
+/* WordDisplay.module.css */
