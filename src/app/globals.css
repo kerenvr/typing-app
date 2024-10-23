@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+
 
   @layer base {
     :root {
@@ -92,13 +90,21 @@ a {
 }
 
 .cursor {
-    border-right: 2px solid black;
-    animation: blink 1s infinite;
-  }
-  
-  @keyframes blink {
-    50% { border-color: transparent; }
-  }
+  border-right: 2px solid black;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+.cursor.stopped {
+  animation: none; /* Stops the blinking animation */
+}
+
+.cursor.incorrect {
+  border-right: 2px solid rgb(250, 72, 72);
+}
   
   .navbar {
     margin: auto;

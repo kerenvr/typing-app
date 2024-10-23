@@ -14,10 +14,10 @@ const DifficultySelector = ({ setDifficulty, difficulty }) => {
 
   return (
     <div className={styles.container}>
-    <h2>Level: {difficulty}</h2>
+    <h2>Difficulty: {difficulty}</h2>
 
     <div className={styles.changedifficulty}>
-        <h2>Change Level: </h2>
+        <h2>Change Difficulty: </h2>
 
         <div className={styles.btn}>
             {['1', '2', '3', '4', '5'].map((level) => (

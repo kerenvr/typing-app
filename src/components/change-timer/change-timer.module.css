@@ -1,0 +1,18 @@
+.btnContainer{
+    display: flex;
+    gap: 10px;
+}
+
+.btn{
+
+}
+
+.container{
+    display: flex;
+    gap: 30px;
+}
+
+.changetimerAmount{
+    display: flex;
+    gap: 10px;
+}

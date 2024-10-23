@@ -4,13 +4,16 @@ import { prisma } from '@/lib/db';
 export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
-        const difficulty = searchParams.get('difficulty'); // This can be string or null
+        const difficulty = searchParams.get('difficulty');
+        const limitParam = searchParams.get('limit');
 
         // Prepare the filter for Prisma
         const filter = difficulty ? { difficulty } : {}; // If difficulty is null, return all words
+        const limit = limitParam ? parseInt(limitParam, 10) : 30;
 
         const words = await prisma.wordBank.findMany({
             where: filter,
+            take: limit,
         });
 
         if (words.length === 0) {

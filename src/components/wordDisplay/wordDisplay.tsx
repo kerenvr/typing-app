@@ -5,9 +5,10 @@ interface WordDisplayProps {
     words: string;
     charsTyped: string;
     wpm: number;
+    cursorStopped: boolean;
 }
 
-const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => {
+const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, cursorStopped }) => {
     const ref = useRef<HTMLSpanElement>(null);
     const pRef = useRef<HTMLDivElement>(null);
     const [y, setY] = useState<number>(0);
@@ -33,18 +34,18 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     useEffect(() => {
         if ((prevY - y) === (fontSize * 3)) {
-            marginTopRef.current = marginTopRef.current + (fontSize * THRESHOLD);
+            marginTopRef.current += (fontSize * THRESHOLD);
             setMarginTop(marginTopRef.current);
             return;
         }
         
         if (y === prevY) {
-            marginTopRef.current = marginTopRef.current - (fontSize * THRESHOLD);
+            marginTopRef.current -= (fontSize * THRESHOLD);
             setMarginTop(marginTopRef.current);
         }
 
         if (prevY !== y && prevY !== 0 && prevY < y) {
-            marginTopRef.current = marginTopRef.current - (fontSize * THRESHOLD);
+            marginTopRef.current -= (fontSize * THRESHOLD);
             setMarginTop(marginTopRef.current);
         }
         setPrevY(y);
@@ -52,33 +53,36 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     return (
         <div className={styles.container}>
-        <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
-            {words.split('').map((char, index) => {
-                let color;
-                let bgColor;
-                let underline;
-                if (index < charsTyped.length) {
-                    color = char === charsTyped[index] ? '#a5b4fc' : '#f87171';
-                    underline = char === charsTyped[index] ? 'none' : 'underline';
-                    bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
+            <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
+                {words.split('').map((char, index) => {
+                    let color;
+                    let bgColor;
+                    let underline;
 
-                }
-                return (
-                    <span key={index} 
-                          style={{ 
-                            textDecoration: underline,
-                            textDecorationColor: bgColor,
-                            color,
-                            borderRadius: '10px', 
-                            padding: '5px',
-                            }}>
-                        {char}
-                        {index === charsTyped.length - 1 && <span ref={ref} className="cursor"></span>}
-                    </span>
-                );
-            })}
-        </p>
-    </div>
+                    if (index < charsTyped.length) {
+                        color = char === charsTyped[index] ? '#a5b4fc' : '#f87171';
+                        underline = char === charsTyped[index] ? 'none' : 'underline';
+                        bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
+                    }
+
+                    return (
+                        <span 
+                            key={index}
+                            style={{
+                                textDecoration: underline,
+                                textDecorationColor: bgColor,
+                                color,
+                                borderRadius: '10px',
+                                padding: '5px',
+                            }}
+                        >
+                            {char}
+                            {index === charsTyped.length - 1 && !cursorStopped && <span ref={ref} className="cursor"></span>}
+                        </span>
+                    );
+                })}
+            </p>
+        </div>
     );
 };
 
