@@ -1,32 +1,54 @@
-.container{
-    display: flex;  
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
+.container {
+  /* background-color: orange; */
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.wordContainer{
-    max-width: 1000px;
-    font-size: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    max-height: 4.85em;
-    overflow-y: hidden;
-    user-select: none;
-    color: #74726F;
+.wordContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 3.1em;
+  overflow-y: hidden;
+}
+
+.word{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.letter {
+  color: gray;
+}
+
+.activeWord {
+  color: gold
+}
+
+.activeLetter{
+  color:aqua;
+}
+
+.correct{
+  color: green;
+}
+
+.incorrect{
+  color: red;
 }
 
 .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.wpm{
-    font-size: 34px;
-    color: #8FA38F;
+.wpm {
+  font-size: 34px;
+  color: #8fa38f;
 }
+
+/* WordDisplay.module.css */

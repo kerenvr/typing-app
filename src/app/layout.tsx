@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Reddit_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar"
 import Footer from "@/components/footer/Footer"
 
-const inter = Inter({ subsets: ["latin"] });
+const reddit_Mono = Reddit_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true} className={`bg-gradient-to-t from-purple-200 via-blue-200 to-indigo-200 ${inter.className}`}>
+      <body suppressHydrationWarning={true} className={`bg-yel low-50 ${reddit_Mono.className}`}>
         <div className="navbar">
           <Navbar />
         </div>

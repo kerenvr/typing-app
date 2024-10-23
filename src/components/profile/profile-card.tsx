@@ -1,22 +1,40 @@
 import { LuUser } from "react-icons/lu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { auth, signOut } from '@/auth';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 export const ProfileCard = async () => {
     const session = await auth();
-    const token = await auth();
 
     return (
         <>
-        <div className="bg-white rounded-[30px] space-y-10 px-16 py-8 shadow-2xl">
+        <div className="bg-white rounded-[30px] space-y-10 px-16 py-8">
             <div className="flex flex-col justify-center items-center px-5 space-y-4">
                 {session && session.user && (
                 <>
+                 <DropdownMenu>
+                        <DropdownMenuTrigger>
                     <Avatar className="w-28 h-28 outline-2">
+                        
+
                         <AvatarImage src={session?.user.image ?? ''} />
                         <AvatarFallback className="outline-2">
                             <LuUser className="w-28 h-28"/>
                         </AvatarFallback>
                     </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem>
+                            Change Image
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
                     <div className='flex flex-col justify-center items-center'>
                         <h1 className="text-2xl font-semibold pb-3">{session.user.name}</h1>
                         <div className="flex flex-col justify-center items-center">

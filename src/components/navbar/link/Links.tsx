@@ -23,7 +23,6 @@ const links =[
 
 const Links = () => {
     const [open, setOpen] = useState(false);
-    console.log(open)
 
     useEffect(() => {
         const handleResize = () => {

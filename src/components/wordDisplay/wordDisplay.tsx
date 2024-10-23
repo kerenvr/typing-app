@@ -32,6 +32,17 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
     }, [charsTyped]);
 
     useEffect(() => {
+        if ((prevY - y) === (fontSize * 3)) {
+            marginTopRef.current = marginTopRef.current + (fontSize * THRESHOLD);
+            setMarginTop(marginTopRef.current);
+            return;
+        }
+        
+        if (y === prevY) {
+            marginTopRef.current = marginTopRef.current - (fontSize * THRESHOLD);
+            setMarginTop(marginTopRef.current);
+        }
+
         if (prevY !== y && prevY !== 0 && prevY < y) {
             marginTopRef.current = marginTopRef.current - (fontSize * THRESHOLD);
             setMarginTop(marginTopRef.current);
@@ -41,22 +52,8 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     return (
         <div className={styles.container}>
-            <p ref={pRef} className={styles.words} style={{ marginTop: `${marginTop}px` }}>
-                {words.split('').map((char, index) => {
-                    let color;
-                    let decoration;
-                    if (index < charsTyped.length) {
-                        color = char === charsTyped[index] ? '#8FA38F' : '#f87171';
-                        decoration = 'underline';
-                    }
-                    return (
-                        <span key={index} style={{ color, textDecoration: decoration }}>
-                            {char}
-                            {index === charsTyped.length - 1 && <span ref={ref} className="cursor"></span>}
-                        </span>
-                    );
-                })}
-            </p>
+
+
         </div>
     );
 };
