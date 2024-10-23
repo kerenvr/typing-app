@@ -52,8 +52,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm }) => 
 
     return (
         <div className={styles.container}>
-
-
+            {words}
         </div>
     );
 };
