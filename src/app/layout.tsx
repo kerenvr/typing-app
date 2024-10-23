@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true} className={`bg-yel low-50 ${reddit_Mono.className}`}>
+      <body suppressHydrationWarning={true}>
         <div className="navbar">
           <Navbar />
         </div>
