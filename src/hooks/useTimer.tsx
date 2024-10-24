@@ -1,25 +1,27 @@
 import { useState, useEffect } from "react";
 
-export const useTimer = (isRunning: boolean, reset: boolean): number => {
-    const [seconds, setSeconds] = useState(0);
-    
+export const useTimer = (isRunning: boolean, reset: boolean, timerAmount: number): number => {
+    const [seconds, setSeconds] = useState(timerAmount); // Initialize with timerAmount
+
     useEffect(() => {
         if (reset) {
-            setSeconds(0); // Reset the seconds when the reset flag is true
+            setSeconds(timerAmount); // Reset to the timerAmount when the reset flag is true
         }
-    }, [reset]);
+    }, [reset, timerAmount]);
 
     useEffect(() => {
         let intervalId: NodeJS.Timeout;
-        if (isRunning && !reset) {
+
+        if (isRunning && !reset && seconds > 0) {
             intervalId = setInterval(() => {
-                setSeconds(prevSeconds => prevSeconds + 1);
+                setSeconds(prevSeconds => Math.max(prevSeconds - 1, 0)); // Decrease seconds, not below 0
             }, 1000);
         }
+
         return () => {
             clearInterval(intervalId);
         };
-    }, [isRunning, reset]);
-    
+    }, [isRunning, reset, seconds]);
+
     return seconds;
-}
+};

@@ -11,7 +11,6 @@ const TimeLimitSelector: React.FC<TimeLimitSelectorProps> = ({ setTimerAmount, t
     const handleTimerAmountChange = (seconds: number) => {
         setTimerAmount(seconds);
     };
-    console.log('Current TimerAmount in Typing:', timerAmount);
 
     return (
         <div className={styles.container}>

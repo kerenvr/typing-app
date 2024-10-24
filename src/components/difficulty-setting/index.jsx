@@ -9,8 +9,6 @@ const DifficultySelector = ({ setDifficulty, difficulty }) => {
   const handleDifficultyChange = (level) => {
     setDifficulty(level);
   };
-  console.log('Current Difficulty in Typing:', difficulty);
-
 
   return (
     <div className={styles.container}>

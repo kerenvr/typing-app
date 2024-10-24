@@ -7,7 +7,7 @@
 
 
 .active {
-    background-color: rgb(249, 249, 249);
+    background-color: #216b967c;
     border-radius: 30px;
-    color: black;
+    color: white;
 }

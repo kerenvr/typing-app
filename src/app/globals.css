@@ -73,15 +73,17 @@
   --text: #434343;
   --primary: #B7C9F2;
   --textPrimary: #b5b0ff;
+  --lightBlue: #9BC7E0;
+  --darkBlue: #1D4E6B;
+  --greyText: #E7E7E7;
 }
 
 body {
-  color: var(--text);
-  min-height: 96.7vh;
+  color: var(--greyText);
   background-color: #ffffff;
   opacity: 1;
-  background-image:  linear-gradient(#f6f6f6 1px, transparent 1px), linear-gradient(to right, #f6f6f6 1px, #ffffff 1px);
-  background-size: 20px 20px;
+  background-image: linear-gradient(rgba(17, 46, 66, 0.605), rgba(17, 46, 66, 0.605)), url('../../public/low-poly-grid-haikei.svg');
+  background-size: cover;
 }
 
 a {
@@ -90,7 +92,7 @@ a {
 }
 
 .cursor {
-  border-right: 2px solid black;
+  border-right: 3px solid rgb(255, 255, 255);
   animation: blink 1s infinite;
 }
 
@@ -102,13 +104,11 @@ a {
   animation: none; /* Stops the blinking animation */
 }
 
-.cursor.incorrect {
-  border-right: 2px solid rgb(250, 72, 72);
+ 
+main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin: 0;
 }
-  
-  .navbar {
-    margin: auto;
-    max-width: 1600px;
-    padding-left: 30px;
-    padding-right: 30px;
-  }

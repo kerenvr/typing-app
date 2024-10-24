@@ -60,7 +60,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, curso
                     let underline;
 
                     if (index < charsTyped.length) {
-                        color = char === charsTyped[index] ? '#a5b4fc' : '#f87171';
+                        color = char === charsTyped[index] ? '#2CC995' : '#f87171';
                         underline = char === charsTyped[index] ? 'none' : 'underline';
                         bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
                     }
@@ -73,7 +73,6 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, curso
                                 textDecorationColor: bgColor,
                                 color,
                                 borderRadius: '10px',
-                                padding: '5px',
                             }}
                         >
                             {char}

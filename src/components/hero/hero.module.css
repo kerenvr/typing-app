@@ -1,5 +1,4 @@
 .container{
-    min-height: 700px;
     margin: auto;
     max-width: 1300px;
     display: flex;
@@ -10,8 +9,9 @@
   }
 
   .title{
-    font-size: clamp(4rem, 10vw, 7rem);
-    font-weight: 400;
+    color: var(--lightBlue);
+    font-size: clamp(4rem, 5vw, 7rem);
+    font-weight: 500;
   }
 
   .textContainer{
@@ -28,5 +28,26 @@
     max-width: 550px;
     text-align: center;
   }
+
+  .btn{
+    display: flex;
+    padding: 5px;
+    gap: 10px;
+    background-color: #2cc995ac;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  .btn:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+
 
 

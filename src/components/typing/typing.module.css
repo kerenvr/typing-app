@@ -1,10 +1,10 @@
 .container {
-  /* background-color: orange; */
   font-size: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 80px;
 }
 
 .wordContainer {
@@ -37,17 +37,22 @@
     align-items: start;
     font-size: 18px;
     gap: 30px;
-    color: #a5b4ec;
-    outline: auto;
+    color: var(--lightBlue);
     border-radius: 10px; 
     padding: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 80px;
+    text-transform: uppercase;
 
+}
+
+.wpm{
 }
 
 .wpmtime{
     display: flex;
     align-items: start;
+    min-width: 2px;
+    font-size: 28px;
     gap: 20px;
 }
 
@@ -56,12 +61,35 @@
 .scorecontainer{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 40px;
+  font-size: 30px;
 }
 
 .restartbtn {
-  color: #a5b4ec;
-  outline: auto;
+  display: flex;
   padding: 5px;
+  gap: 10px;
+  background-color: #ffffff44;
   border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  max-width: 200px;
+  margin-top: 80px;
+}
+
+.skeleton{
+  outline: #1d4e6b54;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  min-width: 72.53vw;
+  border-radius: 10px;
+  font-size: 20px;
+  color: var(--lightBlue);
 }

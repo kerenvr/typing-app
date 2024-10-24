@@ -1,8 +1,4 @@
-.cursor {
-    border-right: 2px solid black;
-    animation: blink 1s infinite;
-  }
-  
-  @keyframes blink {
-    50% { border-color: transparent; }
+  .words{
+    color: var(--greyText);
+    font-weight: 700;
   }
