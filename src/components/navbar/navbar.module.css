@@ -5,12 +5,5 @@
     justify-content: space-between;
     padding-left: 30px;
     padding-right: 30px;
-    background-color: #112E42;
-}
-
-.logo {
-    color: var(--text);
-    font-size: 30px;
-    font-weight: bold;
-    width: 10px;
+    background-color: var(--navbar)
 }

@@ -1,12 +1,8 @@
 "use client"; 
 
 import styles from './hero.module.css';
-import { TiKeyboard } from "react-icons/ti";
 import { Montserrat } from "next/font/google";
 import { useRouter } from 'next/navigation'; // Import from next/navigation
-import { cn } from '@/lib/utils';
-
-const montserrat = Montserrat({ subsets: ["latin"] });
 
 interface HeroProps {
     title: string;

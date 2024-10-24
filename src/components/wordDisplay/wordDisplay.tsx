@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from './wordDisplay.module.css';
+import { useTheme } from '../../themes/ThemeContext'; // Import the theme context
+
 
 interface WordDisplayProps {
     words: string;
@@ -17,6 +19,27 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, curso
     const [marginTop, setMarginTop] = useState<number>(0);
     const [fontSize, setFontSize] = useState<number>(0);
     const THRESHOLD = 1.5;
+
+    const colorsByTheme = {
+        blue: {
+            correct: '#2CC995',
+            incorrect: '#f87171',
+        },
+        pink: {
+            correct: '#FFD000',
+            incorrect: '#f87171',
+        },
+        green: {
+            correct: '#FF8940',
+            incorrect: '#f87171',
+        },
+        purple: {
+            correct: '#FA94FF',
+            incorrect: '#f87171',
+        },
+    };
+    const { theme } = useTheme();
+    const { correct, incorrect } = colorsByTheme[theme] || colorsByTheme.blue; 
 
     useEffect(() => {
         if (pRef.current) {
@@ -60,7 +83,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, curso
                     let underline;
 
                     if (index < charsTyped.length) {
-                        color = char === charsTyped[index] ? '#2CC995' : '#f87171';
+                        color = char === charsTyped[index] ? correct : 'white';
                         underline = char === charsTyped[index] ? 'none' : 'underline';
                         bgColor = char === charsTyped[index] ? 'transparent' : '#f87171';
                     }
@@ -69,10 +92,9 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, curso
                         <span 
                             key={index}
                             style={{
-                                textDecoration: underline,
+                                backgroundColor: bgColor,
                                 textDecorationColor: bgColor,
                                 color,
-                                borderRadius: '10px',
                             }}
                         >
                             {char}

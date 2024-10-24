@@ -37,7 +37,7 @@
     align-items: start;
     font-size: 18px;
     gap: 30px;
-    color: var(--lightBlue);
+    color: var(--dashboard);
     border-radius: 10px; 
     padding: 10px;
     margin-bottom: 80px;
@@ -45,10 +45,9 @@
 
 }
 
-.wpm{
-}
 
 .wpmtime{
+    color: white;
     display: flex;
     align-items: start;
     min-width: 2px;
@@ -80,10 +79,10 @@
   align-items: center;
   max-width: 200px;
   margin-top: 80px;
+  color: white;
 }
 
 .skeleton{
-  outline: #1d4e6b54;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -12,7 +12,7 @@ const ScoreScreen: React.FC<ScoreScreenProps> = ({ wpm, seconds, totalWords }) =
     <>
     <div>
         <div>
-            <p>You typed {totalWords} words in {seconds} seconds with {wpm} WPM. </p>
+            <p className='text-white'>You typed {totalWords} words in {seconds} seconds with {wpm} WPM. </p>
         </div>
     </div>
     </>

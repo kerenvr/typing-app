@@ -7,7 +7,7 @@
 
 
 .active {
-    background-color: #216b967c;
+    background-color: var(--activeLink);
     border-radius: 30px;
     color: white;
 }

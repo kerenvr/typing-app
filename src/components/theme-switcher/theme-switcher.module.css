@@ -1,0 +1,34 @@
+.btn {
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.blue {
+    background-color: var(--themeBlue);
+    border: 2px solid var(--themeBlue);
+}
+
+.pink {
+    background-color: var(--neonSalmon);
+    border: 2px solid var(--neonSalmon);
+}
+
+.green {
+    background-color: var(--bmoGreen);
+    border: 2px solid var(--bmoGreen);
+}
+
+.purple {
+    background-color: var(--themePurple);
+    border: 2px solid var(--themePurple);
+}
+
+.themeSwitcher {
+    display: flex;
+    gap: 3px;
+}
+
+.active {
+    border: 2px solid white; /* Highlight active button */
+    transform: scale(1.05); /* Slightly enlarge */
+}
