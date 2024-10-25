@@ -2,3 +2,7 @@
     color: var(--greyText);
     font-weight: 700;
   }
+
+  .container{
+    max-width: 900px;
+  }

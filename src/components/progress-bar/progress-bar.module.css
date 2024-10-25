@@ -1,0 +1,14 @@
+/* ProgressBar.css */
+.progressCircle {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    border-radius: 50%;
+    position: relative;
+}
+
+.progress {
+    position: absolute;
+    border-radius: 50%;
+    clip: rect(0, 100px, 100px, 50px); /* Create the clipping effect */
+    background-color: #4caf50; /* Color of the progress */
+}
