@@ -18,7 +18,7 @@ const DifficultySelector = ({ setDifficulty, difficulty }) => {
         <h2>Change Difficulty: </h2>
 
         <div className={styles.btn}>
-            {['1', '2', '3', '4', '5'].map((level) => (
+            {[1, 2, 3, 4, 5].map((level) => (
             <button key={level} onClick={() => handleDifficultyChange(level)}>
                 {level}
             </button>
