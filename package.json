@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.2.0",
+    "@clerk/nextjs": "^6.0.2",
     "@hookform/resolvers": "^3.4.2",
     "@libsql/client": "^0.6.2",
     "@prisma/adapter-libsql": "^5.14.0",
@@ -28,10 +29,7 @@
     "express": "^4.19.2",
     "lodash": "^4.17.21",
     "lucide-react": "^0.379.0",
-    "mysql": "^2.18.1",
-    "mysql2": "^3.9.7",
     "next": "14.2.3",
-    "next-auth": "^5.0.0-beta.18",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",

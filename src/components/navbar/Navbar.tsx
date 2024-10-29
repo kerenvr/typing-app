@@ -4,6 +4,14 @@ import Links from "./link/Links";
 import { useRouter } from 'next/navigation';
 import ThemeSwitcher from "../theme-switcher/theme-switcher";
 
+import {
+    ClerkProvider,
+    SignInButton,
+    SignedIn,
+    SignedOut,
+    UserButton
+  } from '@clerk/nextjs'
+
 const NavBar = () => {
     const router = useRouter();
 
@@ -18,6 +26,12 @@ const NavBar = () => {
             </button>
             <div className="flex justify-center items-center space-x-2">
                 <Links />
+                <SignedOut>
+                    <SignInButton />
+                </SignedOut>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
                 <ThemeSwitcher />
             </div>
         </div>

@@ -8,6 +8,7 @@ import styles from './typing.module.css';
 import DifficultySelector from '../difficulty-setting/index';
 import ScoreScreen from '../score-screen/score-screen';
 import TimerLimitSelector from '../change-timer/change-timer';
+import { useUser } from "@clerk/nextjs";
 
 const Typing = () => {
   const [words, setWords] = useState<string>('');
@@ -15,7 +16,7 @@ const Typing = () => {
   const [index, setIndex] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [moveOn, setMoveOn] = useState<boolean>(true);
-  const [difficulty, setDifficulty] = useState<string>('1');
+  const [difficulty, setDifficulty] = useState<number>(1);
   const [wordCount, setWordCount] = useState<number>(200);
   const [cursorStopped, setCursorStopped] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
@@ -23,6 +24,29 @@ const Typing = () => {
   const [timerAmount, setTimerAmount] = useState<number>(30);
   const [resetTimer, setResetTimer] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [hasSaved, setHasSaved] = useState(false);
+
+
+  const { isLoaded, user } = useUser();
+  
+  const handleSaveWpm = async () => {
+		if (!user?.username|| !user.id) return;
+		const request = await fetch("/api/save-wpm", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				userId: user?.id,
+				wpm: wpm,
+				difficulty: difficulty,
+			  time: timerAmount
+			}),
+		});
+		const response = await request.json();
+		alert(response.message);
+	};
+
 
   const SkeletonLoader = () => (
     <div className={styles.skeleton}>
@@ -94,8 +118,9 @@ const Typing = () => {
   const wpm = seconds !== 0 ? Math.round((charsTyped.length / 5) / (seconds / 60)) : 0;
 
   useEffect(() => {
-    if (countdown === 0 && isRunning) {
-      console.log(charsTyped, charsTyped.split(' '), charsTyped.split(' ').length)
+    if (countdown === 0 && isRunning && !hasSaved) {
+      handleSaveWpm()
+      setHasSaved(true);
       setTotalWordsTyped(charsTyped.split(' ').length);
       setIsRunning(false);
       setCursorStopped(true);
@@ -104,6 +129,7 @@ const Typing = () => {
   }, [countdown, timerAmount, charsTyped, isRunning]);
 
   const resetGame = () => {
+    setHasSaved(false);
     setCharsTyped('');
     setIndex(0);
     setIsRunning(false);
