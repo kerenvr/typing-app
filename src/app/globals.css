@@ -52,6 +52,17 @@
 
 }
 
+.body-container {
+  min-height: calc(100vh - 100px);
+  display: flex;  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  max-width: 1300px;
+  padding: 30px;
+}
+
 body.blue {
   background-image: linear-gradient(rgba(17, 46, 66, 0.605), rgba(17, 46, 66, 0.605)), url('../../public/low-poly-grid-haikei.svg');
   background-size: cover;
@@ -72,6 +83,9 @@ body.purple {
   background-size: cover;
 }
 
+body {
+  color: white;
+}
 
 a {
   text-decoration: none;
