@@ -15,6 +15,10 @@ const links =[
         title: "Typing",
         path: "/typing",
     },
+    {
+        title: "Stats",
+        path: "/stats",
+    },
 ];
 
 const Links = () => {
