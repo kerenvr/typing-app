@@ -5,20 +5,23 @@ import styles from "./links.module.css";
 import NavLink from "./navLink/navLink";
 import Image from "next/image";
 import { debounce } from 'lodash';
+import { useUser } from "@clerk/nextjs"; 
 
-const links =[
-    {
-        title: "Typing",
-        path: "/typing",
-    },
-    {
-        title: "Stats",
-        path: "/stats",
-    },
-];
+
 
 const Links = () => {
     const [open, setOpen] = useState(false);
+    const { user } = useUser(); // Get the user information
+    const links =[
+        {
+            title: "Typing",
+            path: "/typing",
+        },
+            ...(user ? [{ title: "Stats", path: "/stats" }] : []), // Only include if user is logged in
+    
+
+    ];
+
 
     useEffect(() => {
         const handleResize = () => {
