@@ -1,11 +1,10 @@
 .container{
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 70px);
     display: flex;  
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: auto;
-    max-width: 1300px;
-    padding: 30px;
+    background-color: var(--primaryPurple);
 }
 
