@@ -22,7 +22,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({ words, charsTyped, wpm, curso
 
     const colorsByTheme = {
         blue: {
-            correct: '#2CC995',
+            correct: '#555555',
             incorrect: '#f87171',
         },
         pink: {
