@@ -81,6 +81,7 @@ const Typing = () => {
   }, [difficulty, wordCount]);
 
   const handleKeyDown = (e: KeyboardEvent) => { 
+    if (isFinished) return;
     setIsRunning(true); // timer starts when user types something
     const { key } = e; // get the key only
  
@@ -159,6 +160,9 @@ const Typing = () => {
             seconds={seconds}
             totalWords={totalWordsTyped}
           />
+          <button className={styles.restartbtn} onClick={resetGame}>
+            Restart
+        </button>
         </div>
       ) : (
         <div className={styles.container}>
