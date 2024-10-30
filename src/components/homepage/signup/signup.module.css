@@ -1,0 +1,19 @@
+.container{
+  margin-top: 5px;
+  width: 100%; 
+  display: flex;
+  padding: 50px;
+  justify-content: center;
+  gap:150px;
+  align-items: top;
+  padding-top: 200px;
+  padding-bottom: 200px;
+  background-image: url('../../../../public/pattern.png');
+}
+
+.header{
+  font-size: 80px;
+  text-transform: lowercase;
+  font-weight: 600;
+}
+
