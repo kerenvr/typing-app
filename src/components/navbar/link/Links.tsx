@@ -8,10 +8,6 @@ import { debounce } from 'lodash';
 
 const links =[
     {
-        title: "Homepage",
-        path: "/",
-    },
-    {
         title: "Typing",
         path: "/typing",
     },
