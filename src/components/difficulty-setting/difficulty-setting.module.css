@@ -1,14 +1,30 @@
-.btn{
-    display: flex;
-    gap: 10px;
-}
-
 .container{
     display: flex;
-    gap: 30px;
+    padding: 5px;
+    gap: 10px;
+    border-radius: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+    max-width: 200px;
+    color: white;
+    text-transform: lowercase;
+    font-weight: 800;
+    background-color: var(--primaryPurple)
 }
 
 .changedifficulty{
     display: flex;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
+
+.dropdown {
+    border-radius: 4px;
+    width: 50px;
+    background-color: var(--primaryPurple)
+
+  }

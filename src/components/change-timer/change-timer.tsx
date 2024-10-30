@@ -7,25 +7,25 @@ interface TimeLimitSelectorProps {
 }
 
 const TimeLimitSelector: React.FC<TimeLimitSelectorProps> = ({ setTimerAmount, timerAmount }) => {
-    // Function to handle button clicks
-    const handleTimerAmountChange = (seconds: number) => {
+    // Function to handle timer amount change
+    const handleTimerAmountChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const seconds = Number(event.target.value);
         setTimerAmount(seconds);
     };
 
     return (
         <div className={styles.container}>
-            <h2>Timer: {timerAmount} sec</h2>
-
             <div className={styles.changetimerAmount}>
-                <h2>Change Timer: </h2>
+                <h2>Timer</h2>
 
-                <div className={styles.btnContainer}>
+                <select value={timerAmount} onChange={handleTimerAmountChange} className={styles.dropdown}>
+                    <option value="" disabled>Select Timer</option>
                     {[10, 30, 60, 90, 120].map((seconds) => (
-                        <button className={styles.btn} key={seconds} onClick={() => handleTimerAmountChange(seconds)}>
+                        <option key={seconds} value={seconds}>
                             {seconds}
-                        </button>
+                        </option>
                     ))}
-                </div>
+                </select>
             </div>
         </div>
     );

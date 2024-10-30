@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from "./difficulty-setting.module.css";
 
-
 const DifficultySelector = ({ setDifficulty, difficulty }) => {
-  // State to hold the current difficulty level
-
-  // Function to handle button clicks
-  const handleDifficultyChange = (level) => {
+  // Function to handle difficulty change
+  const handleDifficultyChange = (event) => {
+    const level = Number(event.target.value);
     setDifficulty(level);
   };
 
   return (
     <div className={styles.container}>
-    <h2>Difficulty: {difficulty}</h2>
+      {/* <h2>Difficulty: {difficulty}</h2> */}
 
-    <div className={styles.changedifficulty}>
-        <h2>Change Difficulty: </h2>
+      <div className={styles.changedifficulty}>
+        <h2>Difficulty</h2>
 
-        <div className={styles.btn}>
-            {[1, 2, 3, 4, 5].map((level) => (
-            <button key={level} onClick={() => handleDifficultyChange(level)}>
-                {level}
-            </button>
-            ))}
-        </div>
+        <select value={difficulty} onChange={handleDifficultyChange} className={styles.dropdown}>
+          <option value="" disabled>Select Difficulty</option>
+          {[1, 2, 3, 4, 5].map((level) => (
+            <option key={level} value={level}>
+              {level}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );
