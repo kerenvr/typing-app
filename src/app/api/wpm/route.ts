@@ -7,6 +7,9 @@ export async function GET(req: Request, { params }: { params: { userId: string }
     const userId = searchParams.get('userid');
 
     try {
+        if (!userId) {
+            return NextResponse.json({ message: "User ID is required" }, { status: 400 });
+        }
         const records = await prisma.wpm.findMany({ where: { userId } });
         return NextResponse.json(records, { status: 200 });
     } catch (error) {
