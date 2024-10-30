@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { useUser } from "@clerk/nextjs";
+import styles from "./statsPage.module.css"
 
 function StatsPage() {
     const { isLoaded, user } = useUser();
@@ -8,6 +9,20 @@ function StatsPage() {
     const [error, setError] = useState(null);
     const [averageWpm, setAverageWpm] = useState<number>(0);
     const [greatestWpm, setGreatestWpm] = useState<number>(0);
+
+    interface CardProps {
+        title: string;
+        value: number;
+    }
+
+    const Card: React.FC<CardProps> = ({ title, value }) => {
+        return (
+            <div className={styles.cardContainer}>
+                <h2 className={styles.header}>{title}</h2>
+                <p className={styles.value}>{value}</p>
+            </div>
+        );
+    }
 
     useEffect(() => {
         if (isLoaded && user) {
@@ -49,17 +64,24 @@ function StatsPage() {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div>
-            <h1>WPM Records</h1>
-            <h2>Average Wpm: {averageWpm}</h2>
-            <h2>Greatest Wpm: {greatestWpm}</h2>
-            <ul>
+        <div className={styles.container}>
+            <div className={styles.statsContainer}>
+                <div>
+                    <h1 className={styles.title}>Statistics</h1>
+                    <p>Welcome back, {user?.username}</p>
+                </div>
+                <div className={styles.allCards}>
+                    <Card title={"Average WPM"} value={averageWpm}/>
+                    <Card title={"Greatest WPM"} value={greatestWpm}/>
+                </div>
+            </div>
+            {/* <ul>
                 {wpmRecords.map((record) => (
                     <li key={record.id}>
                         WPM: {record.wpm}, Difficulty: {record.difficulty}, Time: {record.time}
                     </li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
     );
 }

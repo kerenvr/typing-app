@@ -1,0 +1,55 @@
+.container{
+    min-height: calc(100vh - 70px);
+    display: flex;  
+    justify-content: flex-start;
+    background-color: var(--primaryPurple);
+}
+.statsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-left: 200px; /* Add left margin */
+    margin-right: 200px; 
+    gap: 80px;
+}
+
+
+.cardContainer {
+    outline: 4px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    gap: 50px;
+    border-radius: 4px;
+    max-height: 300px;
+    background-color: white;
+}
+
+.header {
+    font-size: 18px;
+    text-transform: lowercase;
+}
+
+
+.value {
+    font-size: 48px;
+    color: var(--primaryPink)
+    
+}
+
+.allCards {
+    display: flex;
+    gap: 40px;
+    
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 48px;
+    font-weight: 800;
+}
