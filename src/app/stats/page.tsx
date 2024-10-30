@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { useUser } from "@clerk/nextjs";
 import styles from "./statsPage.module.css"
+import ProtectedRoute from '@/components/protected-route/protectedRoute';
 
 function StatsPage() {
     const { isLoaded, user } = useUser();
     const [wpmRecords, setWpmRecords] = useState([]);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<string | null>(null);
     const [averageWpm, setAverageWpm] = useState<number>(0);
     const [greatestWpm, setGreatestWpm] = useState<number>(0);
 
@@ -37,7 +38,7 @@ function StatsPage() {
                     setWpmRecords(data);
 
                     // get average
-                    let totalWpm = data.reduce((previousValue: number, currentValue: number) => {
+                    let totalWpm = data.reduce((previousValue: number, currentValue: { wpm: number }) => {
                         return previousValue + currentValue.wpm;
                     }, 0)
                     
@@ -45,13 +46,17 @@ function StatsPage() {
 
                     setAverageWpm(average)
 
-                    const max = Math.max(...data.map(item => item.wpm))
+                    const max = Math.max(...data.map((item: { wpm: number }) => item.wpm))
                     setGreatestWpm(max)
 
                 
                 } catch (err) {
                     console.error("Error fetching WPM records:", err);
-                    setError(err.message);
+                    if (err instanceof Error) {
+                        setError(err.message);
+                    } else {
+                        setError("An unknown error occurred");
+                    }
                 }
             };
 
@@ -64,6 +69,7 @@ function StatsPage() {
     if (error) return <div>Error: {error}</div>;
 
     return (
+        <ProtectedRoute>
         <div className={styles.container}>
             <div className={styles.statsContainer}>
                 <div>
@@ -83,6 +89,7 @@ function StatsPage() {
                 ))}
             </ul> */}
         </div>
+        </ProtectedRoute>
     );
 }
 
