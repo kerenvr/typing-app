@@ -1,13 +1,14 @@
 .container {
     min-width: 100px;
     padding: 5px;
-    font-weight: 600;
+    font-weight: 400;
     text-align: center;
+    text-transform: lowercase;
 }
 
 
 .active {
     background-color: var(--activeLink);
     border-radius: 30px;
-    color: white;
+    color: black;
 }
