@@ -45,8 +45,6 @@ const Typing = () => {
 			  time: timerAmount
 			}),
 		});
-		const response = await request.json();
-		alert(response.message);
 	};
 
 
