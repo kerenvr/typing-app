@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import WordDisplay from '@/components/wordDisplay/wordDisplay';
+import WordDisplay from '@/components/typing/word-display/wordDisplay';
 import { useTimer } from '@/hooks/useTimer';
 import { useStopwatch } from '@/hooks/useStopwatch';
 import styles from './typing.module.css';

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from './wordDisplay.module.css';
-import { useTheme } from '../../themes/ThemeContext'; // Import the theme context
+import { useTheme } from '../../../themes/ThemeContext'; // Import the theme context
 
 
 interface WordDisplayProps {
