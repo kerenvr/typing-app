@@ -2,6 +2,7 @@
 
 import styles from './hero.module.css';
 import { Montserrat } from "next/font/google";
+import Image from 'next/image';
 import { useRouter } from 'next/navigation'; // Import from next/navigation
 
 interface HeroProps {
@@ -18,6 +19,13 @@ const Hero: React.FC<HeroProps> = ({ title, description }) => {
 
     return (
         <div className={styles.container}>
+            <Image 
+                src="/hero-graphics.png" 
+                alt="Hero Image" 
+                width={800} 
+                height={800} 
+                className={styles.centeredImage} 
+            />
             <div className={styles.textContainer}>
                 <div className={styles.title}>
                     <h1>{title}</h1>

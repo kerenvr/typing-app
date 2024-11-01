@@ -1,4 +1,4 @@
-import Typing from '@/components/typing/Typing'
+import Typing from '@/components/typing/typing-interface/Typing'
 import styles from './typingPage.module.css'
 import { Suspense } from 'react'
 

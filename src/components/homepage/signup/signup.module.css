@@ -1,19 +1,51 @@
-.container{
+.container {
   margin-top: 5px;
-  width: 100%; 
+  width: 100%;
   display: flex;
-  padding: 50px;
+  flex-direction: column; /* Stack items vertically for mobile */
+  padding: 30px; /* Adjusted padding for mobile */
   justify-content: center;
-  gap:150px;
-  align-items: top;
-  padding-top: 200px;
-  padding-bottom: 200px;
-  background-image: url('../../../../public/pattern.png');
+  gap: 30px; /* Adjusted gap for mobile */
+  align-items: center; /* Center items for mobile */
+  /* background-image: url('../../../../public/pattern.png'); */
 }
 
-.header{
-  font-size: 80px;
-  text-transform: lowercase;
-  font-weight: 600;
+.header {
+  font-size: 36px; /* Smaller font size for mobile */
+  font-weight: 800;
+  color: var(--brandPurple);
+  text-shadow: 
+      -1.2px -1.2px 0 #000,  
+      1.2px -1.2px 0 #000,
+      -1.2px  1.2px 0 #000,
+      1.2px  1.2px 0 #000;
 }
 
+.centeredImage {
+  position: absolute; /* Position the image absolutely */
+  top: 60%; /* Centered for mobile */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust position to be exactly in the center */
+  display: none;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) { /* Adjust min-width as needed */
+  .container {
+      flex-direction: row; /* Stack items horizontally for desktop */
+      padding: 50px; /* Original padding for desktop */
+      gap: 150px; /* Original gap */
+      align-items: flex-start; /* Align items to the top for desktop */
+      padding-top: 130px; /* Original top padding */
+      padding-bottom: 130px; /* Original bottom padding */
+  }
+
+  .header {
+      font-size: 120px; /* Original font size for desktop */
+  }
+
+  .centeredImage {
+      top: 285%; /* Adjust as necessary for desktop */
+      display: block;
+  }
+}

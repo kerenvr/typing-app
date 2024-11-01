@@ -11,6 +11,7 @@ const karla = Karla({ subsets: ["latin"] });
 import {
   ClerkProvider
 } from '@clerk/nextjs'
+import Footer from '@/components/footer/Footer';
 
 export default function RootLayout({
   children,
@@ -37,6 +38,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <div className='body-container'>
           {children}
         </div>
+        <Footer />
       </body>
     </html>
     </ClerkProvider>

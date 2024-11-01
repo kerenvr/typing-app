@@ -1,52 +1,65 @@
-.container{
-    width: 100%; 
+.container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 50px;
-    gap:150px;
+    padding: 50px 20px; /* Reduced padding for mobile */
+    gap: 50px; /* Adjusted gap for mobile */
     align-items: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    background-color: var(--primaryPurple);
-}
-
-.header{
-    font-size: 64px;
-    transform: skewX(-8deg);
+    background-color: var(--beige);
+    font-size: 24px; /* Smaller font size for mobile */
     font-weight: 700;
-    color: white;
 }
 
-.imgtext{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* justify-content: space-between; */
+.header {
+    color: var(--brandPurple);
     width: 100%; 
-
 }
 
-.text{
+.imgtext {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--primaryPink);
-    font-size: 30px;
-    width: 30%;
-    font-weight: 700;
-
+    width: 100%;
+    gap: 50px; /* Adjusted gap for mobile */
 }
 
-.img:nth-child(3){
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+.img:nth-child(3) {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.1); /* Smaller shadow for mobile */
 }
 
 .container:nth-child(3) {
-    background-color: var(--pastelBlue);
-  }
+    background-color: var(--primaryPurple);
+}
 
-  .text:nth-child(1){
+.text:nth-child(1) {
     color: white;
-    justify-content: start;
-    
+    width: 100%; /* Ensure full width on mobile */
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) { 
+    .container {
+        padding: 100px; /* Increased padding for desktop */
+        gap: 100px; /* Original gap */
+        font-size: 56px; /* Original font size */
+    }
+
+    .header {
+        min-width: 1000px; /* Desktop-specific width */
+        padding-left: 300px;
+    }
+
+    .imgtext {
+        gap: 100px; /* Original gap for desktop */
+    }
+
+    .img:nth-child(3) {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Original shadow */
+    }
+
+    .text:nth-child(1) {
+        min-width: 1000px; /* Original width for desktop */
+        padding-left: 300px;
+    }
 }
