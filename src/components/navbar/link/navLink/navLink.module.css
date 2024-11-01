@@ -1,14 +1,17 @@
 .container {
-    min-width: 100px;
-    padding: 5px;
     font-weight: 400;
     text-align: center;
     text-transform: lowercase;
+    color: var(--brandPurple);
+    padding-right: 20px;
+}
+
+.container:hover{
+    font-weight: 600;
 }
 
 
 .active {
-    background-color: var(--activeLink);
     border-radius: 30px;
-    color: black;
+    font-weight: 700;
 }
