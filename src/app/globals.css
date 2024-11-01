@@ -11,7 +11,7 @@
   --greyText: #E7E7E7;
   --neonSalmon: #FF6F61;
   --darkPink: #5A3566;
-  --activeLink: #e7e7e71a;
+  --activeLink: #e7e7e74c;
   --primaryYellow: #FFD000;
   --lavendar: #D3CCFF;
   --purple: #003D8A;
@@ -27,7 +27,12 @@
   --pastelBlue: #D0E8F7;
   --pastelYellow: #FCFFA7;
   --pastelTurquoise: #DFEEEB;
-  --primaryPurple: #D6D0F0;
+  --primaryPurple: #c3c5fd;
+
+  --brandPurple: #9c9ffd;
+  --beige: #fff1e1;
+  --primaryYellow: #ffd200;
+  --blushPink: #fecddc;
 
 }
 
@@ -59,32 +64,6 @@
 
 }
 
-.body-container {
-}
-
-body.blue {
-
-}
-/* 
-body.pink {
-  background-image: linear-gradient(rgba(90, 53, 102, 0.605), rgba(90, 53, 102, 0.605)), url('../../public/low-poly-grid-haikei-pink.svg');
-  background-size: cover;
-}
-
-body.green {
-  background-image: linear-gradient(rgba(0, 80, 96, 0.605), rgba(0, 80, 96, 0.605)), url('../../public/low-poly-grid-haikei-green.svg');
-  background-size: cover;
-}
-
-body.purple {
-  background-image: linear-gradient(rgba(0, 61, 138, 0.605), rgba(0, 61, 138, 0.605)), url('../../public/low-poly-grid-haikei-purple.svg');
-  background-size: cover;
-} */
-
-body {
-  /* color: white; */
-  
-}
 
 a {
   text-decoration: none;
