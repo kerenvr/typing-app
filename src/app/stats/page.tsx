@@ -104,7 +104,7 @@ function StatsPage() {
                     ) : (
                         <>
                           <Card title={"Average WPM"} value={isNaN(averageWpm) ? 0 : averageWpm} />
-                          <Card title={"Highest WPM"} value={isNaN(averageWpm) ? 0 : averageWpm} />
+                          <Card title={"Highest WPM"} value={isNaN(greatestWpm) ? 0 : greatestWpm} />
 
                         </>
 
