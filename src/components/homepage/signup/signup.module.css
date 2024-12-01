@@ -1,51 +1,52 @@
+/* src/components/homepage/signup/signup.module.css */
 .container {
   margin-top: 5px;
   width: 100%;
   display: flex;
   flex-direction: column; /* Stack items vertically for mobile */
-  padding: 30px; /* Adjusted padding for mobile */
+  padding: 30px;
   justify-content: center;
-  gap: 30px; /* Adjusted gap for mobile */
-  align-items: center; /* Center items for mobile */
-  /* background-image: url('../../../../public/pattern.png'); */
+  gap: 30px;
+  align-items: center;
+  background-image: url('../../../../public/signup2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Apply specific styles */
 .header {
-  font-size: 36px; /* Smaller font size for mobile */
+  font-size: 36px;
   font-weight: 800;
-  color: var(--brandPurple);
-  text-shadow: 
-      -1.2px -1.2px 0 #000,  
-      1.2px -1.2px 0 #000,
-      -1.2px  1.2px 0 #000,
-      1.2px  1.2px 0 #000;
+  color: white;
+  max-width: 90%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.centeredImage {
-  position: absolute; /* Position the image absolutely */
-  top: 60%; /* Centered for mobile */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Adjust position to be exactly in the center */
-  display: none;
+.signupButton {
+  padding: 15px 30px;
+  font-size: 18px;
+  color: white;
+  background-color: #FF5C8D; /* Bubblegum Pink */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 200px;
+  text-align: center;
 }
 
-/* Desktop Styles */
-@media (min-width: 768px) { /* Adjust min-width as needed */
-  .container {
-      flex-direction: row; /* Stack items horizontally for desktop */
-      padding: 50px; /* Original padding for desktop */
-      gap: 150px; /* Original gap */
-      align-items: flex-start; /* Align items to the top for desktop */
-      padding-top: 130px; /* Original top padding */
-      padding-bottom: 130px; /* Original bottom padding */
-  }
+.signupButton:hover {
+  background-color: #ff3c70; /* Darker pink on hover */
+  transform: scale(1.05);
+}
 
-  .header {
-      font-size: 120px; /* Original font size for desktop */
-  }
-
-  .centeredImage {
-      top: 285%; /* Adjust as necessary for desktop */
-      display: block;
-  }
+.signupButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 92, 141, 0.5); /* Focus state */
 }

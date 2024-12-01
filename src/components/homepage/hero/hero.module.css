@@ -2,13 +2,17 @@
   width: 100%; 
   display: flex; 
   flex-direction: column; 
-  justify-content: center; 
+  justify-content: start; 
   align-items: center; 
   /* position: relative;  */
   /* background: linear-gradient(to right, var(--primaryPurple), var(--primaryPink)); */
-  gap: 60px;
+  gap: 200px;
+  /* background-color: var(--brandPurple); */
   min-height: 600px;
-  background-color: var(--brandPurple);
+  /* background-image: url('../../../../public/hero8.png');
+  background-repeat: no-repeat;
+  background-size: cover; */
+
 }
 
 .centeredImage {
@@ -19,18 +23,17 @@
 }
 
   .title{
-    font-size: clamp(4.5rem, 5vw, 3rem);
-    font-weight: 800;
-    color: var(--beige);
-    text-transform: uppercase;
+    font-size: clamp(4.5rem, 5vw, 20rem);
+    font-weight: 700;
+    color: black;
+    /* text-transform: uppercase; */
     text-align: center;
-    max-width: 400px;
-    line-height: .9;
-    text-shadow: 
+    /* max-width: 400px; */
+    /* text-shadow: 
     -1.2px -1.2px 0 #000,  
      1.2px -1.2px 0 #000,
     -1.2px  1.2px 0 #000,
-     1.2px  1.2px 0 #000;
+     1.2px  1.2px 0 #000; */
      
 
     /* transform: skewX(-8deg);
@@ -39,6 +42,28 @@
      1px -1px 0 #000,
     -1px  1px 0 #000,
      1px  1px 0 #000; */
+
+     overflow-x: hidden; /* Ensures the content is not revealed until the animation */
+     border-right: .15em solid orange; /* The typwriter cursor */
+     white-space: nowrap; /* Keeps the content on a single line */
+     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+     animation: 
+       typing 3.5s steps(40, end),
+       blink-caret .75s step-end infinite;
+  }
+
+ 
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--bubblegum); }
   }
 
   .desc{
@@ -48,40 +73,65 @@
     text-align: center;
   }
   
+  
 
-/* CSS */
-.btn{
-  background-color: var(--blushPink);
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 3rem;
-  box-sizing: border-box;
-  color: #111827;
-  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  font-size: 1.3rem;
-  font-weight:700;
-  font-style: italic;
-  text-transform: uppercase;
-  line-height: 1.25rem;
-  padding: 1.8rem 4rem;
-  text-align: center;
-  text-decoration: none #D1D5DB solid;
-  text-decoration-thickness: auto;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.btn:hover {
-  background-color: rgb(249,250,251);
-}
-
-.btn:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.btn:focus-visible {
-  box-shadow: none;
-}
+  /* CSS */
+  .btn {
+    appearance: none;
+    background-color: #FAFBFC;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 10px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    list-style: none;
+    padding: 10px 16px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+    color: black;
+    background-color: white;
+  }
+  
+  .btn:hover {
+    background-color: #FAFBFC;
+    text-decoration: none;
+    transition-duration: 0.1s;
+    color: black;
+  }
+  
+  .btn:disabled {
+    background-color: #FAFBFC;
+    border-color: rgba(27, 31, 35, 0.15);
+    color: #959DA5;
+    cursor: default;
+  }
+  
+  .btn:active {
+    background-color: #EDEFF2;
+    box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+    transition: none 0s;
+  }
+  
+  .btn:focus {
+    outline: 1px transparent;
+  }
+  
+  .btn:before {
+    display: none;
+  }
+  
+  .btn:-webkit-details-marker {
+    display: none;
+  }

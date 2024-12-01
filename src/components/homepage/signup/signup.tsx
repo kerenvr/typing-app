@@ -1,22 +1,17 @@
 "use client"; 
 import Image from 'next/image';
 import styles from './signup.module.css';
-import { SignUp } from '@clerk/nextjs'
+import { SignUp } from '@clerk/nextjs';
+import Link from 'next/link';
 
 const SignupHome = () => {
-
     return (
         <>
         <div className={styles.container}>
-        <Image 
-                src="/signupgraphics.png" 
-                alt="Hero Image" 
-                width={1300} 
-                height={1300} 
-                className={styles.centeredImage} 
-            />
-            <SignUp routing="hash" />   
-            <h1 className={styles.header}>Start now.</h1>    
+            <h1 className={styles.header}>Sign Up Today!</h1>
+            <Link href="/auth/sign-up">
+                <button className={styles.signupButton}>Sign Up</button>
+            </Link>
         </div>
         </>
     );

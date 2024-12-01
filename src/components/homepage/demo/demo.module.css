@@ -5,13 +5,14 @@
     padding: 50px 20px; /* Reduced padding for mobile */
     gap: 50px; /* Adjusted gap for mobile */
     align-items: center;
-    background-color: var(--beige);
+
     font-size: 24px; /* Smaller font size for mobile */
-    font-weight: 700;
+    font-weight: 500;
+    background-color: var(--brandPurple);
 }
 
 .header {
-    color: var(--brandPurple);
+    color: white;
     width: 100%; 
 }
 
@@ -29,11 +30,11 @@
 }
 
 .container:nth-child(3) {
-    background-color: var(--primaryPurple);
+    background-color: white;
 }
 
 .text:nth-child(1) {
-    color: white;
+    color: var(--brandPurple);
     width: 100%; /* Ensure full width on mobile */
 }
 
@@ -42,7 +43,7 @@
     .container {
         padding: 100px; /* Increased padding for desktop */
         gap: 100px; /* Original gap */
-        font-size: 56px; /* Original font size */
+        font-size: 36px; /* Original font size */
     }
 
     .header {

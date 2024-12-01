@@ -31,6 +31,10 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <ClerkProvider>
     <html data-theme={theme} lang="en" suppressHydrationWarning={true}>
+      <head>
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
       <body className={`${theme} ${karla.className}`} suppressHydrationWarning={true}>
         <div className="navbar">
           <Navbar />

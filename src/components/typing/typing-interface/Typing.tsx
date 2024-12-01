@@ -49,9 +49,15 @@ const Typing = () => {
 
 
   const SkeletonLoader = () => (
-    <div className={styles.skeleton}>
-      loading...  
+
+    <div role="status" className=" animate-pulse w-full">
+        <div className="h-6 bg-gray-200 rounded-full dark:bg-gray-700  mb-6 mt-4"></div>
+        <div className="h-6 bg-gray-200 rounded-full dark:bg-gray-700  mb-6"></div>
+        <div className="h-6 bg-gray-200 rounded-full dark:bg-gray-700  mb-6"></div>
+        <span className="sr-only">Loading...</span>
     </div>
+
+
   );
 
 
@@ -86,6 +92,17 @@ const Typing = () => {
     if (key === 'Backspace') {
       updateWordsAndIndex('', true);
       return;
+    }
+
+    // Prevent spacebar scrolling when:
+    // 1. The active element is a BUTTON (to prevent form submission or focus shift)
+    // 2. The active element is not an INPUT or TEXTAREA (to prevent page scroll)
+    if (e.key === ' ') {
+      if (document.activeElement?.tagName === 'BUTTON') {
+        e.preventDefault(); // Prevent default space behavior on BUTTON
+      } else if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault(); // Prevent page scroll when spacebar is pressed outside input/textarea
+      }
     }
     
     if (key.length !== 1) { // if it is 'Shift' etc

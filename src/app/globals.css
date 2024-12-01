@@ -71,7 +71,7 @@ a {
 }
 
 .cursor {
-  border-right: 3px solid var(--primaryPurple);
+  border-right: 5px solid var(--bubblegum);
   animation: blink 1s infinite;
 }
 

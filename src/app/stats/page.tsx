@@ -10,10 +10,16 @@ function StatsPage() {
     const [error, setError] = useState<string | null>(null);
     const [averageWpm, setAverageWpm] = useState<number>(0);
     const [greatestWpm, setGreatestWpm] = useState<number>(0);
+    const [cardIsLoading, setCardIsLoading] = useState<boolean>(); //render skeleton on card if loading
 
     interface CardProps {
         title: string;
         value: number;
+    }
+
+
+    interface SkeletonCardProps {
+        title: string;
     }
 
     const Card: React.FC<CardProps> = ({ title, value }) => {
@@ -25,10 +31,23 @@ function StatsPage() {
         );
     }
 
+    const SkeletonCard: React.FC<SkeletonCardProps> = ({ title  }) => {
+        return (
+            <div className={styles.cardContainer}>
+                <div role="status" className="flex flex-col justify-center animate-pulse">
+                      <h2 className={styles.header}>{title}</h2>
+                  <div className="h-16 bg-gray-100 rounded-md dark:bg-gray-600 w-16 mb-2.5 mt-6 self-center"></div>
+                </div>
+            </div>
+        );
+    };
+    
+
     useEffect(() => {
         if (isLoaded && user) {
             const fetchWpmRecords = async () => {
                 try {
+                    setCardIsLoading(true);
                     const response = await fetch(`/api/wpm/?userid=${user.id}`);
                     if (!response.ok) {
                         const errorDetails = await response.json(); // Try to parse any error details from the response
@@ -44,11 +63,11 @@ function StatsPage() {
                     
                     let average = totalWpm / data.length;
 
-                    setAverageWpm(average)
+                    setAverageWpm(Math.round(average))
 
                     const max = Math.max(...data.map((item: { wpm: number }) => item.wpm))
                     setGreatestWpm(max)
-
+                    setCardIsLoading(false);
                 
                 } catch (err) {
                     console.error("Error fetching WPM records:", err);
@@ -72,13 +91,25 @@ function StatsPage() {
         <ProtectedRoute>
         <div className={styles.container}>
             <div className={styles.statsContainer}>
-                <div>
+                <div className={styles.title_greeting}>
                     <h1 className={styles.title}>Statistics</h1>
                     <p>Welcome back, {user?.username}</p>
                 </div>
                 <div className={styles.allCards}>
-                    <Card title={"Average WPM"} value={averageWpm}/>
-                    <Card title={"Greatest WPM"} value={greatestWpm}/>
+                    {cardIsLoading ? (
+                        <>
+                            <SkeletonCard title={"Average WPM"} />
+                            <SkeletonCard title={"Highest WPM"}/>
+                        </>
+                    ) : (
+                        <>
+                          <Card title={"Average WPM"} value={isNaN(averageWpm) ? 0 : averageWpm} />
+                          <Card title={"Highest WPM"} value={isNaN(averageWpm) ? 0 : averageWpm} />
+
+                        </>
+
+                    )
+                }
                 </div>
             </div>
             {/* <ul>
