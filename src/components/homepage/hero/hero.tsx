@@ -4,6 +4,7 @@ import styles from './hero.module.css';
 import { Montserrat } from "next/font/google";
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'; // Import from next/navigation
+import { useUser } from "@clerk/nextjs";
 
 interface HeroProps {
     title: string;
@@ -11,10 +12,16 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ title, description }) => {
+    const { user } = useUser();  // Get the current user object
     const router = useRouter(); // Initialize the router
 
     const handleStartTyping = () => {
-        router.push('/auth/sign-up'); // Navigate to /typing
+        if (!user) {
+            router.push('/auth/sign-up'); // Navigate to /typing
+        } else {
+            router.push('/typing'); // Navigate to /typing
+        }
+
     };
 
     return (

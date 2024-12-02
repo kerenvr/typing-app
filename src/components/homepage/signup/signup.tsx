@@ -1,7 +1,6 @@
 "use client"; 
 import Image from 'next/image';
 import styles from './signup.module.css';
-import { SignUp } from '@clerk/nextjs';
 import Link from 'next/link';
 
 const SignupHome = () => {
