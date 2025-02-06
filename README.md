@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bloom-Type
 
-## Getting Started
+Bloom-Type is a typing website designed to help users improve their typing skills through a fast and interactive typing experience. Built with Next.js, TypeScript, and React, Bloom-Type offers a user-friendly interface and provides real-time feedback to enhance the learning process.
 
-First, run the development server:
+bloom-type.com
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Interactive Typing Practice**: Test your typing speed with various difficulty levels and word collections.
+- **Real-Time Feedback**: See your progress as you type.
+- **Track Your Progress**: Monitor your typing speed over time.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Next.js**: Framework for building the app.
+- **React**: JavaScript library for building the user interface.
+- **TypeScript**: Superset of JavaScript for type safety and better development experience.
+- **CSS/Styled Components**: For styling the user interface.
+  
+## Installation
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+Ensure you have the following installed:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Steps
 
-## Deploy on Vercel
+1. Clone the repository:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    git clone https://github.com/kerenvr/typing-app.git
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Navigate to the project directory:
+
+    ```bash
+    cd bloom-type
+    ```
+
+3. Install dependencies:
+
+    Using npm:
+
+    ```bash
+    npm install
+    ```
+
+    Or using yarn:
+
+    ```bash
+    yarn install
+    ```
+
+4. Run the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    Or with yarn:
+
+    ```bash
+    yarn dev
+    ```
+
+5. Open your browser and navigate to `http://localhost:3000` to view the app.
+
+## Development
+
+To start developing locally, follow these steps:
+
+- **To start the server**: `npm run dev` or `yarn dev`
+- **To build the project for production**: `npm run build` or `yarn build`
+- **To test the app**: `npm run test` or `yarn test`
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-xyz`).
+3. Make your changes and commit them (`git commit -am 'Add feature xyz'`).
+4. Push to the branch (`git push origin feature-xyz`).
+5. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- **Next.js**: For building an excellent framework for React applications.
+- **React**: For creating the best way to build interactive user interfaces.
+- **TypeScript**: For type safety and better developer experience.
+
+## Contact
+
+For any inquiries, reach out to me at eskeren21@gmail.com
